@@ -20,6 +20,7 @@
     "pdfmake":"pdfmake#^0.1.8",
     "datatables-datetime-moment":"https://github.com/Marchrius/datatables-datetime-moment.git#^1.10.13",
     "datatables.net-plugins":"datatables.net-plugins#^1.10.9",
+    "jquery-datatables-checkboxes":"https://github.com/gyrocode/jquery-datatables-checkboxes.git#^1.2.7",
     "font-awesome":"font-awesome#^4.7.0"
   }
 }

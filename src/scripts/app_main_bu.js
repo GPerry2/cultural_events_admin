@@ -254,7 +254,7 @@ function frontPage(formName, query) {
  * method for creating and loading DataTable into container
  */
 function openView(status, filter, repo, target, formName) {
-  //console.log(status, filter, repo, target, formName)
+ //console.log(status, filter, repo, target, formName)
   //Update View Title
   let columnDefs, view, viewname;
   viewname = (status == "" ? "All " : status + " ") + config.listName[formName];
@@ -264,6 +264,69 @@ function openView(status, filter, repo, target, formName) {
   $.cookie(encodeURIComponent(config.default_repo) + '.lastViewName', viewname, {expires:7});
   $.cookie(encodeURIComponent(config.default_repo) + '.lastViewHash', hasher.getHash(), {expires:7});
   [columnDefs, view]= getColumnDefinitions(formName, filter);
+  /*
+  switch (formName) {
+    case'hot_spot':
+      columnDefs = [
+        {"data": "hs_eventName", "title": "Event Name", "filter": false, "sortOrder": "asc"},
+        {
+          "data": "hs_eventStatus",
+          "title": 'Event Status',
+          "filter": true,
+          "sortOrder": "asc",
+          "restrict": filter["hs_eventStatus"],
+          "filterChoices": app.data.eventStatusFilter
+        },
+        {
+          "data": "hs_eventProject",
+          "title": "Project",
+          "filter": true,
+          "sortOrder": "asc",
+          "filterChoices": app.data.eventProjectFilter
+        },
+        {"data": "hs_ward_1", "title": "Ward", "filter": true, "sortOrder": "asc", "filterChoices": app.data.wards},
+        {
+          "data": "hs_eventFeatured",
+          "title": "Featured",
+          "filter": true,
+          "sortOrder": "asc",
+          "filterChoices": app.data.eventFeaturedFilter
+        },
+        {
+          "data": "hs_eventType",
+          "title": "Type",
+          "filter": true,
+          "sortOrder": "asc",
+          "filterChoices": app.data.eventTypeFilter
+        },
+        {
+          "data": "hs_eventAccessibility",
+          "title": "Accessible",
+          "filter": true,
+          "sortOrder": "asc",
+          "filterChoices": app.data.eventFeaturesFilter
+        },
+        {
+          "data": "hs_eventFamily",
+          "title": "Family?",
+          "filter": true,
+          "sortOrder": "asc",
+          "filterChoices": app.data.eventYesNoFilter
+        },
+        {
+          "data": "hs_eventFree",
+          "title": "Free?",
+          "filter": true,
+          "sortOrder": "asc",
+          "filterChoices": app.data.eventYesNoFilter
+        }
+      ];
+      view = "hot_spot";
+      break;
+    default:
+      break;
+  }
+  */
   //sequentially set the column targets property: 1, 2, 3, 4...
   $.each(columnDefs, function (i, col) {
     col.targets = i;
@@ -291,20 +354,20 @@ function openView(status, filter, repo, target, formName) {
     $("#btn-adminSearch").find('i').removeClass('glyphicon glyphicon-refresh').addClass('glyphicon glyphicon-search');
     myDataTable.dt.search(this.value).draw();
   });
-  /*
-    $('#tabExportCSV').click(function () {
-      $(".dt-button.buttons-csv.buttons-html5").click();
-    });
-    $('#tabExportEXCEL').click(function () {
-      $(".dt-button.buttons-excel.buttons-html5").click();
-    });
-    $('#tabExportPDF').click(function () {
-      $(".dt-button.buttons-pdf.buttons-html5").click();
-    });
-    $('#tabExportCOPY').click(function () {
-      $(".dt-button.buttons-copy.buttons-html5").click();
-    });
-  */
+/*
+  $('#tabExportCSV').click(function () {
+    $(".dt-button.buttons-csv.buttons-html5").click();
+  });
+  $('#tabExportEXCEL').click(function () {
+    $(".dt-button.buttons-excel.buttons-html5").click();
+  });
+  $('#tabExportPDF').click(function () {
+    $(".dt-button.buttons-pdf.buttons-html5").click();
+  });
+  $('#tabExportCOPY').click(function () {
+    $(".dt-button.buttons-copy.buttons-html5").click();
+  });
+*/
   toggleView("view_pane");
   //typeof registerEvents==="function"?registerEvents():"";
   return myDataTable;
@@ -448,7 +511,7 @@ function loadForm(destinationSelector, data, fid, repo, form_id) {
     f.setData(data);
     $('.dropzone').each(function(){
       console.log('show uploads')
-      showUploads(dropzones[$(this).attr("id")] ,$(this).attr("id"), data, repo, true, true);
+    showUploads(dropzones[$(this).attr("id")] ,$(this).attr("id"), data, repo, true, true);
     })
 
     $("#modifiedBy").val(modifiedUsername);
@@ -466,9 +529,9 @@ function loadForm(destinationSelector, data, fid, repo, form_id) {
       }
     }
   }
-  //f.CotForm.callFunction(toggleView("form_pane");)
+ //f.CotForm.callFunction(toggleView("form_pane");)
   toggleView("form_pane");
-  //typeof registerEvents==="function"?registerEvents():"";
+ //typeof registerEvents==="function"?registerEvents():"";
 }
 
 /**
@@ -580,10 +643,10 @@ function processForm(action, repo, form_id, fid) {
 function toggleView(target){
   let appName,lastView,lastViewHash, lastViewName,lastHash;
   appName = config.default_repo;
-  //lastView = $.cookie(encodeURIComponent(appName) + '.lastView');
+ //lastView = $.cookie(encodeURIComponent(appName) + '.lastView');
   lastViewHash = $.cookie(encodeURIComponent(appName) + '.lastViewHash');
   lastViewName = $.cookie(encodeURIComponent(appName) + '.lastViewName');
-  // lastHash = $.cookie(encodeURIComponent(appName) + '.lastHash');
+ // lastHash = $.cookie(encodeURIComponent(appName) + '.lastHash');
 
   if(target==="view_pane"){
     $("#view_pane, .forView").show();
@@ -591,12 +654,11 @@ function toggleView(target){
     $("#form_pane").html("");
     $.cookie(appName+ '.lastHash', lastViewHash,{expires:7});
     setHashSilently(lastViewHash);
-
     if ($("#view_pane").is(":empty")){
       hasher.setHash( appName + '?ts=' + new Date().getTime() + '&status='  );
     }
     else{
-      myDataTable.dt.ajax.reload(null,false);
+
       $("#viewtitle").html(lastViewName===""?config.title:lastViewName);
     }
   }
@@ -670,19 +732,11 @@ class cc_retrieve_view {
   getColumnSortOrder() {
     let arrSortOrder = [];
     $.each(this.columnDefs, function (i, item) {
-      if (item.data != null && item.sortOrder) {
+      if (item.data != null) {
         arrSortOrder.push(new Array(i, item.sortOrder ? item.sortOrder : this.defaultSortOrder))
       }
     });
     return arrSortOrder
-  }
-
-  getSelected(){
-    let _this = this, ret = [];
-    $.each(this.dt.column(0).checkboxes.selected(), function(i, val){
-      ret.push(_this.dt.row($('#'+val)).data());
-    });
-    return ret;
   }
 
   /**
@@ -735,16 +789,17 @@ class cc_retrieve_view {
       'buttons': ['pdfHtml5', 'csvHtml5', 'copyHtml5', 'excelHtml5'],
       'deferRender': false,
       //'stateSave': true,
-      // 'stateDuration': 0,
+     // 'stateDuration': 0,
       'sAjaxSource': this.url,
       'fnServerData': this.fnServerOData,
       'iODataVersion': 4,
       'bUseODataViaJSONP': false,
       'createdRow': function (row, data) {
         let doc_id = data.id ? data.id : data['@odata.id'].substring((data['@odata.id'].indexOf("('") + 2), (data['@odata.id'].indexOf("')")));
-        $(row).attr('id', doc_id);
         $(row).attr('data-id', doc_id);
+        $(row).attr('data-link', data['@odata.id']);
         $(row).attr('data-formName', _this.formName);
+        $(row).attr('data-OrderNumber', data['OrderNumber']);
       },
       "columnDefs": this.columnDefs,
       "select":true,
@@ -834,29 +889,28 @@ class cc_retrieve_view {
           }
         });
 
-        // $("#maincontent .dataTable tbody tr").on('click', function(){
-        //    hasher.setHash($(this).attr('data-formName') + '/' + $(this).attr('data-id') + '?ts=' + new Date().getTime() );
-        // });
+       // $("#maincontent .dataTable tbody tr").on('click', function(){
+       //    hasher.setHash($(this).attr('data-formName') + '/' + $(this).attr('data-id') + '?ts=' + new Date().getTime() );
+       // });
 
         let tbody = $('#'+unid+ ' tbody');
         let dt = $('#'+unid).DataTable();
         tbody.on('dblclick', 'tr', function () {
           //let data = dt.row( this ).data();
-          //console.log('row data:',data);
           $(this).addClass('selected');
           hasher.setHash($(this).attr('data-formName') + '/' + $(this).attr('data-id') + '?ts=' + new Date().getTime() );
         } );
 
-        tbody.on('click', 'tr', function () {
+               tbody.on('click', 'tr', function () {
 
-          if ( $(this).hasClass('selected') ) {
-            $(this).removeClass('selected');
-          }
-          else {
-            dt.$('tr.selected').removeClass('selected');
-            $(this).addClass('selected');
-          }
-        } );
+                 if ( $(this).hasClass('selected') ) {
+                   $(this).removeClass('selected');
+                 }
+                 else {
+                   dt.$('tr.selected').removeClass('selected');
+                   $(this).addClass('selected');
+                 }
+               } );
 
         $('.input-mini.form-control').each(function (i) {
           let cb = $(this);
@@ -891,18 +945,15 @@ class cc_retrieve_view {
    */
   fnServerOData(sUrl, aoData, fnCallback, oSettings) {
     let oParams = {};
-    let asOrderBy = [];
     $.each(aoData, function (i, value) {
       oParams[value.name] = value.value;
     });
-    let data = {"$format": "application/json;odata.metadata=none", "$count": true};
+    let data = {"$format": "json", "$count": true};
     let bJSONP = oSettings.oInit.bUseODataViaJSONP;
-
     if (bJSONP) {
       data.$callback = "odatatable_" + (oSettings.oFeatures.bServerSide ? oParams.sEcho : ("load_" + Math.floor((Math.random() * 1000) + 1)));
     }
     $.each(oSettings.aoColumns, function (i, value) {
-
       let sFieldName = (value.sName !== null && value.sName !== "") ? value.sName : ((typeof value.mData === 'string') ? value.mData : null);
       //if (sFieldName === null || !isNaN(Number(sFieldName))) {sFieldName = value.sTitle;}
       if (sFieldName === null || !isNaN(Number(sFieldName))) {
@@ -922,36 +973,26 @@ class cc_retrieve_view {
       }
       let asFilters = [];
       let asColumnFilters = []; //used for jquery.dataTables.columnFilter.js
-      let isColumnArray = [];
       $.each(oSettings.aoColumns,
         function (i, value) {
-
-          let colIsArray = value.isArray? value.isArray:false;
           let sFieldName = value.sName || value.mData;
-          isColumnArray.push(colIsArray);
           //added as a way to fake a Domino style RestrictToCategory. In the column definition, add a restrict property with the value you want to filter
           let restrict = value.restrict;
           let columnFilter = oParams["sSearch_" + i] + (restrict ? restrict : "");
+          //fortunately columnFilter's _number matches the index of aoColumns
           if ((oParams.sSearch !== null && oParams.sSearch !== "" || columnFilter !== null && columnFilter !== "") && value.bSearchable) {
             if (oParams.sSearch !== null && oParams.sSearch !== "") {
               asFilters.push("contains((" + sFieldName + "),'" + oParams.sSearch + "')");
             }
             if (columnFilter !== null && columnFilter !== "") {
-              if(value.isArray){
- //              if(colIsArray){
-                asColumnFilters.push( sFieldName + "/any(d:d eq '" + columnFilter + "')");
-              }else{
-                asColumnFilters.push("contains((" + sFieldName + "),'" + columnFilter + "')");
-              }
+              asColumnFilters.push("contains((" + sFieldName + "),'" + columnFilter + "')");
             }
           }
-
         });
 
       if (asFilters.length > 0) {
         data.$filter = asFilters.join(" or ");
       }
-
       if (asColumnFilters.length > 0) {
         if (data.$filter !== undefined) {
           data.$filter = "(" + data.$filter + ") and (" + asColumnFilters.join(" and ") + ")";
@@ -960,13 +1001,9 @@ class cc_retrieve_view {
         }
       }
 
-
-    for (let i = 0; i < oParams.iSortingCols; i++) {
-        if(isColumnArray[oParams["iSortCol_" + i]]){
-          asOrderBy.push(oParams["mDataProp_" + oParams["iSortCol_" + i]] + "/any(d:d) " + (oParams["sSortDir_" + i] || ""));
-        }else{
-          asOrderBy.push(oParams["mDataProp_" + oParams["iSortCol_" + i]] + " " + (oParams["sSortDir_" + i] || ""));
-        }
+      let asOrderBy = [];
+      for (let i = 0; i < oParams.iSortingCols; i++) {
+        asOrderBy.push(oParams["mDataProp_" + oParams["iSortCol_" + i]] + " " + (oParams["sSortDir_" + i] || ""));
       }
       if (asOrderBy.length > 0) {
         data.$orderby = asOrderBy.join();
@@ -1039,7 +1076,7 @@ function processUploads(DZ, repo, sync) {
   let _files = DZ.getFilesWithStatus(Dropzone.SUCCESS);
   let syncFiles = sync;
   if (_files.length == 0) {
-    //  console.log('No Files Attached')
+  //  console.log('No Files Attached')
   } else {
     $.each(_files, function (i, row) {
       let json = JSON.parse(row.xhr.response);
@@ -1112,11 +1149,9 @@ function showUploads(DZ, id, data, repo, allowDelete,showTable) {
     thisDZ.on("addedfile", function(file) {
       file.getURL = getURL;
       file.caption = caption;
-      if (row.bin_id == file.bin_id) {
-        file.previewElement.addEventListener("click", function () {
-          window.open(file.getURL);
-        });
-      }
+      file.previewElement.addEventListener("click", function () {
+        window.open(file.getURL);
+      });
       //file._captionLabel = Dropzone.createElement("<p>" + file.caption + "</p>")
       //file.previewElement.appendChild(file._captionLabel);
 

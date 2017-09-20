@@ -122,7 +122,7 @@ gulp.task('_bower_extras', () => {
 
 //a task to prepare for deployment to an outside environment
 gulp.task('_deploy_prep', () => {
-  compress = false;
+  compress = true;
   return new Promise(resolve => {
     runSequence('clear_image_cache', 'clean', 'lint', 'build', resolve);
   });
