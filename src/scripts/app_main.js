@@ -254,6 +254,7 @@ function frontPage(formName, query) {
  * method for creating and loading DataTable into container
  */
 function openView(status, filter, repo, target, formName) {
+  console.log('filter:', filter);
   //console.log(status, filter, repo, target, formName)
   //Update View Title
   let columnDefs, view, viewname;
@@ -938,7 +939,7 @@ class cc_retrieve_view {
             }
             if (columnFilter !== null && columnFilter !== "") {
               if(value.isArray){
- //              if(colIsArray){
+                //              if(colIsArray){
                 asColumnFilters.push( sFieldName + "/any(d:d eq '" + columnFilter + "')");
               }else{
                 asColumnFilters.push("contains((" + sFieldName + "),'" + columnFilter + "')");
@@ -961,7 +962,7 @@ class cc_retrieve_view {
       }
 
 
-    for (let i = 0; i < oParams.iSortingCols; i++) {
+      for (let i = 0; i < oParams.iSortingCols; i++) {
         if(isColumnArray[oParams["iSortCol_" + i]]){
           asOrderBy.push(oParams["mDataProp_" + oParams["iSortCol_" + i]] + "/any(d:d) " + (oParams["sSortDir_" + i] || ""));
         }else{
