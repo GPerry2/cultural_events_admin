@@ -1,0 +1,660 @@
+{
+  "eventTypeFilter": [
+    "Community",
+    "Literary",
+    "Visual Art",
+    "Festival",
+    "Performance",
+    "Workshop/Classes",
+    "Film",
+    "Talk",
+    "Historic",
+    "Tour/Walk"
+  ],
+"eventTypeChoices": [
+{
+"text": "Select...",
+"value": ""
+},
+{
+"text": "Community",
+"value": "Community"
+},
+{
+"text": "Literary",
+"value": "Literary"
+},
+{
+"text": "Visual Art",
+"value": "Visual Art"
+},
+{
+"text": "Festival",
+"value": "Festival"
+},
+{
+"text": "Performance",
+"value": "Performance"
+},
+{
+"text": "Workshop/Classes",
+"value": "Workshop/Classes"
+},
+{
+"text": "Film",
+"value": "Film"
+},
+{
+"text": "Talk",
+"value": "Talk"
+},
+{
+"text": "Historic",
+"value": "Historic"
+},
+{
+"text": "Tour/Walk",
+"value": "Tour/Walk"
+}
+],
+"eventFeaturesFilter": [
+"Fully Accessible",
+"Partially Accessible",
+"Not Accessible"
+],
+"eventFeaturesChoices": [
+{
+"text": "Select...",
+"value": ""
+},
+{
+"text": "Fully Accessible",
+"value": "Fully Accessible"
+},
+{
+"text": "Partially Accessible",
+"value": "Partially Accessible"
+},
+{
+"text": "Not Accessible",
+"value": "Not Accessible"
+}
+],
+"eventFeaturedFilter": [
+"Yes",
+"No"
+],
+"eventYesNoFilter": [
+"Yes",
+"No"
+],
+"eventFeaturedChoices": [
+{
+"text": "Select...",
+"value": ""
+},
+{
+"text": "Yes",
+"value": "Yes"
+},
+{
+"text": "No",
+"value": "No"
+}
+],
+"yesNoRadio": [
+{
+"text": "Yes",
+"value": "Yes"
+},
+{
+"text": "No",
+"value": "No"
+}
+],
+"eventProjectFilter": [
+"Community",
+"Signature",
+"Spark",
+"Library"
+],
+"wards": [
+"Etobicoke North (1)",
+"Etobicoke North (2)",
+"Etobicoke Centre (3)",
+"Etobicoke Centre (4)",
+"Etobicoke-Lakeshore (5)",
+"Etobicoke-Lakeshore (6)",
+"York West (7)",
+"York West (8)",
+"York Centre (9)",
+"York Centre (10)",
+"York South-Weston (11)",
+"York South-Weston (12)",
+"Parkdale-High Park (13)",
+"Parkdale-High Park (14)",
+"Eglinton-Lawrence (15)",
+"Eglinton-Lawrence (16)",
+"Davenport (17)",
+"Davenport (18)",
+"Trinity-Spadina (19)",
+"Trinity-Spadina (20)",
+"St. Paul's (21)",
+"St. Paul's (22)",
+"Willowdale (23)",
+"Willowdale (24)",
+"Don Valley West (25)",
+"Don Valley West (26)",
+"Toronto Centre-Rosedale (27)",
+"Toronto Centre-Rosedale (28)",
+"Toronto-Danforth (29)",
+"Toronto-Danforth (30)",
+"Beaches-East York (31)",
+"Beaches-East York (32)",
+"Don Valley East (33)",
+"Don Valley East (34)",
+"Scarborough Southwest (35)",
+"Scarborough Southwest (36)",
+"Scarborough Centre (37)",
+"Scarborough Centre (38)",
+"Scarborough-Agincourt (39)",
+"Scarborough Agincourt (40)",
+"Scarborough-Rouge River (41)",
+"Scarborough-Rouge River (42)",
+"Scarborough East (43)",
+"Scarborough East (44)"
+],
+"eventProjectChoices": [
+{
+"text": "Select...",
+"value": ""
+},
+{
+"text": "Signature",
+"value": "Signature"
+},
+{
+"text": "Community",
+"value": "Community"
+},
+{
+"text": "Spark",
+"value": "Spark"
+},
+{
+"text": "Library",
+"value": "Library"
+}
+],
+"eventStatusFilter": [
+"Pending",
+"Unapproved",
+"Approved"
+],
+"eventStatusChoices": [
+{
+"text": "Select...",
+"value": ""
+},
+{
+"text": "Unapproved",
+"value": "Unapproved"
+},
+{
+"text": "Pending",
+"value": "Pending"
+},
+{
+"text": "Approved",
+"value": "Approved"
+}
+],
+"contactRole": [
+{
+"text": "Owner",
+"value": "Owner"
+},
+{
+"text": "Manager",
+"value": "Manager"
+},
+{
+"text": "Other",
+"value": "Other"
+}
+],
+"authorization": [
+{
+"value": "accepted",
+"text": "I have the authority to enroll the above named business in the HOT Eats program and I authorize the use of the above information on the City of Toronto website in print publications and in other open data applications"
+}
+],
+"IntroText": "<div class=\"row\"><div class=\"col-xs-12 col-sm-2\"><img class=\"img-thumbnail2\" alt=\"hot eats logo\" src=\"img/hoteats-140x140.jpg\"></div><div class=\"col-xs-12 col-sm-10\"><span class=\"\" id=\"area-indicator-help\"><p><strong>Eligibility Criteria</strong></p><p></p><ul><li>Located in the 2017 Cultural Hotspot area (Eglinton Avenue to the north, Lake Ontario to the south, Bayview Avenue/the Don Valley to the west and Victoria Park Avenue to the east)</li><li>Possess a current Dine Safe Green Pass issued by Toronto Public Health</li><li>Provide a $25 or $50 gift certificate by June 9,  2017 to be awarded as a HOT Eats prize</li></ul><p></p><p></p><p>If you have questions, please contact Hyesoo Kim, Arts Program Officer, Arts &amp; Culture Services at <a href=\"mailto:culturalhotspot@toronto.ca?Subject=HOT Eats Inquiry\" target=\"_top\">culturalhotspot@toronto.ca</a> <br>or 416-392-1210.</p></span></div></div>"
+"gift_certificateInfo": "<p><span style=\"color:red;\" class=\"glyphicon glyphicon-asterisk\"></span> In order to be eligible to participate in the HOT Eats program, you must provide a $25 or $50 gift certificate by June 9, 2017, to be awarded as a HOT Eats prize. The gift certificate must be valid until December 31, 2017.  The gift certificate must not require the bearer to make additional purchases.  If the average price of a meal, including a non-alcoholic drink, at your restaurant is more than $25, please provide a $50 gift certificate.</p>",
+"gift_certificate": [
+{
+"text": "I have my own certificate that I can issue",
+"value": "I have my own certificate that I can issue"
+},
+{
+"text": "I would like to use the HOT Eats certificate template",
+"value": "I would like to use the HOT Eats certificate template"
+}
+],
+"restaurant_type": [
+{
+"text": "Bakery/Deli",
+"value": "Bakery/Deli"
+},
+{
+"text": "Cafe/Coffee Shop",
+"value": "Cafe/Coffee Shop"
+},
+{
+"text": "Casual Dining",
+"value": "Casual Dining"
+},
+{
+"text": "Fine Dining",
+"value": "Fine Dining"
+},
+{
+"text": "Pub/Bar",
+"value": "Pub/Bar"
+}
+],
+"cuisine": [
+{
+"text": "African",
+"value": "African"
+},
+{
+"text": "Asian",
+"value": "Asian"
+},
+{
+"text": "Bakery/Desserts",
+"value": "Bakery/Desserts"
+},
+{
+"text": "Brunch",
+"value": "Brunch"
+},
+{
+"text": "Caribbean",
+"value": "Caribbean"
+},
+{
+"text": "Chinese",
+"value": "Chinese"
+},
+{
+"text": "European",
+"value": "European"
+},
+{
+"text": "French",
+"value": "French"
+},
+{
+"text": "Greek",
+"value": "Greek"
+},
+{
+"text": "Indian",
+"value": "Indian"
+},
+{
+"text": "Irish",
+"value": "Irish"
+},
+{
+"text": "Italian",
+"value": "Italian"
+},
+{
+"text": "Japanese",
+"value": "Japanese"
+},
+{
+"text": "Korean",
+"value": "Korean"
+},
+{
+"text": "Kosher",
+"value": "Kosher"
+},
+{
+"text": "Mediterranean",
+"value": "Mediterranean"
+},
+{
+"text": "Mexican",
+"value": "Mexican"
+},
+{
+"text": "Middle Eastern",
+"value": "Middle Eastern"
+},
+{
+"text": "North American",
+"value": "North American"
+},
+{
+"text": "Pizza",
+"value": "Pizza"
+},
+{
+"text": "Sandwiches/Snacks",
+"value": "Sandwiches/Snacks"
+},
+{
+"text": "Thai",
+"value": "Thai"
+},
+{
+"text": "Vegan",
+"value": "Vegan"
+},
+{
+"text": "Vegetarian",
+"value": "Vegetarian"
+},
+{
+"text": "Vietnamese",
+"value": "Vietnamese"
+}
+],
+"services": [
+{
+"text": "Family-friendly",
+"value": "Family-friendly"
+},
+{
+"text": "Licensed",
+"value": "Licensed"
+},
+{
+"text": "Live Music",
+"value": "Live Music"
+},
+{
+"text": "Art on Display",
+"value": "Art on Display"
+},
+{
+"text": "Take-out",
+"value": "Take-out"
+},
+{
+"text": "Dine-in",
+"value": "Dine-in"
+},
+{
+"text": "Delivery",
+"value": "Delivery"
+}
+],
+"priceRange": [
+{
+"text": "Under $15",
+"value": "Under $15"
+},
+{
+"text": "$15 - $25",
+"value": "$15 - $25"
+},
+{
+"text": "$25 or more",
+"value": "$25 or more"
+}
+],
+"accessibility": [
+{
+"text": "Fully Accessible",
+"value": "Fully Accessible"
+},
+{
+"text": "Not Accessible",
+"value": "Not Accessible"
+}
+],
+"photoUploadHelp": "<span class=\"help-block\" id=\"photoHelp\" ><p>*By uploading an image within the Cultural Hotspot form, you are indicating that you have the authority to do so and are giving the City of Toronto copyright permission to reproduce and resize the image into a square for the purpose of promoting Cultural Hotspot and that giving this permission does not infringe any other person's rights.</p><p>Required image size: 2000x1500 pixels at 300 dpi in jpeg format.</p><p>This photo will be used to promote your event. Please choose something indicative of the event, or upload an event flyer.</p></span>"
+"accessibilityHelp": "<span class=\"\"><p><strong>Partially Accessible Criteria:</strong><p>To qualify as a fully barrier-free and wheelchair-accessible location, your venue must comply with all items listed below:</p><ul><li> All pedestrian routes to and from the main entrance and exit should provide a level path or a ramp.</li><li>Main entrance and exit doors should be a minimum of 915mm wide to allow safe passage of persons who use mobility aids, including wheelchairs or scooters.</li><li> Glass doors should be clearly visible when closed. All door-opening hardware should be easy to grasp and use. Automatic door openers are recommended wherever possible. </li><li>Aisle spaces between furniture, equipment or other fixed objects should be wide enough to allow a person using mobility aids to pass.</li><li>If the program/activity is not held at entrance level, there must be an accessible elevator or rap to the floor where this activity is being held.</li></ul></p><p><strong>Fully Accessible Criteria:</strong><p>To qualify as a fully barrier-free and wheelchair-accessible location, your venue must comply with all items listed above and:</p><ul><li>Public washrooms should have a door entrance of at least 915mm wide. The washroom stall should also have an entrance of at least 915mm wide and the stall should have grab bars installed by the toilet. There should be at least one barrier-free sink (knee clearance of 735mm below the vanity counter) with lever faucets.</li><ul></p></span>",
+"orgDescriptionHelp": "Organization description to appear on the Cultural Hotspot website."
+"short_text_max": 140,
+"long_text_max": 900,
+"venueDateTimeDetailsHelp": "<p>Enter the date and time of your event. For example:</p><ul><li>June 16 to 19, 7 - 9 p.m.</li><li>Every Tuesday, May 12 to June 23, 2 - 4 p.m.</li><li>August 30 to October 2, weekdays 9 a.m.to 6 p.m. weekends & holidays 9 a.m. - 5 p.m.</li></ul>",
+"contactRole": [
+{
+"text": "Owner",
+"value": "Owner"
+},
+{
+"text": "Manager",
+"value": "Manager"
+},
+{
+"text": "Other",
+"value": "Other"
+}
+],
+"authorization": [
+{
+"value": "accepted",
+"text": "I have the authority to enroll the above named business in the HOT Eats program and I authorize the use of the above information on the City of Toronto website in print publications and in other open data applications"
+}
+],
+"IntroText": "<div class=\"row\"><div class=\"col-xs-12 col-sm-2\"><img class=\"img-thumbnail2\" alt=\"hot eats logo\" src=\"img/hoteats-140x140.jpg\"></div><div class=\"col-xs-12 col-sm-10\"><span class=\"\" id=\"area-indicator-help\"><p><strong>Eligibility Criteria</strong></p><p></p><ul><li>Located in the 2017 Cultural Hotspot area (Eglinton Avenue to the north, Lake Ontario to the south, Bayview Avenue/the Don Valley to the west and Victoria Park Avenue to the east)</li><li>Possess a current Dine Safe Green Pass issued by Toronto Public Health</li><li>Provide a $25 or $50 gift certificate by June 9,  2017 to be awarded as a HOT Eats prize</li></ul><p></p><p></p><p>If you have questions, please contact Hyesoo Kim, Arts Program Officer, Arts &amp; Culture Services at <a href=\"mailto:culturalhotspot@toronto.ca?Subject=HOT Eats Inquiry\" target=\"_top\">culturalhotspot@toronto.ca</a> <br>or 416-392-1210.</p></span></div></div>"
+"gift_certificateInfo": "<p><span style=\"color:red;\" class=\"glyphicon glyphicon-asterisk\"></span> In order to be eligible to participate in the HOT Eats program, you must provide a $25 or $50 gift certificate by June 9, 2017, to be awarded as a HOT Eats prize. The gift certificate must be valid until December 31, 2017.  The gift certificate must not require the bearer to make additional purchases.  If the average price of a meal, including a non-alcoholic drink, at your restaurant is more than $25, please provide a $50 gift certificate.</p>",
+"gift_certificate": [
+{
+"text": "I have my own certificate that I can issue",
+"value": "I have my own certificate that I can issue"
+},
+{
+"text": "I would like to use the HOT Eats certificate template",
+"value": "I would like to use the HOT Eats certificate template"
+}
+],
+"restaurant_type": [
+{
+"text": "Bakery/Deli",
+"value": "Bakery/Deli"
+},
+{
+"text": "Cafe/Coffee Shop",
+"value": "Cafe/Coffee Shop"
+},
+{
+"text": "Casual Dining",
+"value": "Casual Dining"
+},
+{
+"text": "Fine Dining",
+"value": "Fine Dining"
+},
+{
+"text": "Pub/Bar",
+"value": "Pub/Bar"
+}
+],
+"cuisine": [
+{
+"text": "African",
+"value": "African"
+},
+{
+"text": "Asian",
+"value": "Asian"
+},
+{
+"text": "Bakery/Desserts",
+"value": "Bakery/Desserts"
+},
+{
+"text": "Brunch",
+"value": "Brunch"
+},
+{
+"text": "Caribbean",
+"value": "Caribbean"
+},
+{
+"text": "Chinese",
+"value": "Chinese"
+},
+{
+"text": "European",
+"value": "European"
+},
+{
+"text": "French",
+"value": "French"
+},
+{
+"text": "Greek",
+"value": "Greek"
+},
+{
+"text": "Indian",
+"value": "Indian"
+},
+{
+"text": "Irish",
+"value": "Irish"
+},
+{
+"text": "Italian",
+"value": "Italian"
+},
+{
+"text": "Japanese",
+"value": "Japanese"
+},
+{
+"text": "Korean",
+"value": "Korean"
+},
+{
+"text": "Kosher",
+"value": "Kosher"
+},
+{
+"text": "Mediterranean",
+"value": "Mediterranean"
+},
+{
+"text": "Mexican",
+"value": "Mexican"
+},
+{
+"text": "Middle Eastern",
+"value": "Middle Eastern"
+},
+{
+"text": "North American",
+"value": "North American"
+},
+{
+"text": "Pizza",
+"value": "Pizza"
+},
+{
+"text": "Sandwiches/Snacks",
+"value": "Sandwiches/Snacks"
+},
+{
+"text": "Thai",
+"value": "Thai"
+},
+{
+"text": "Vegan",
+"value": "Vegan"
+},
+{
+"text": "Vegetarian",
+"value": "Vegetarian"
+},
+{
+"text": "Vietnamese",
+"value": "Vietnamese"
+}
+],
+"services": [
+{
+"text": "Family-friendly",
+"value": "Family-friendly"
+},
+{
+"text": "Licensed",
+"value": "Licensed"
+},
+{
+"text": "Live Music",
+"value": "Live Music"
+},
+{
+"text": "Art on Display",
+"value": "Art on Display"
+},
+{
+"text": "Take-out",
+"value": "Take-out"
+},
+{
+"text": "Dine-in",
+"value": "Dine-in"
+},
+{
+"text": "Delivery",
+"value": "Delivery"
+}
+],
+"priceRange": [
+{
+"text": "Under $15",
+"value": "Under $15"
+},
+{
+"text": "$15 - $25",
+"value": "$15 - $25"
+},
+{
+"text": "$25 or more",
+"value": "$25 or more"
+}
+],
+"accessibility": [
+{
+"text": "Fully Accessible",
+"value": "Fully Accessible"
+},
+{
+"text": "Not Accessible",
+"value": "Not Accessible"
+}
+],
+"loops": [
+{
+"text": "Loop1",
+"value": "Loop1"
+},
+{
+"text": "Loop2",
+"value": "Loop2"
+},
+{
+"text": "Loop3",
+"value": "Loop3"
+},
+{
+"text": "Loop4",
+"value": "Loop4"
+},
+{
+"text": "Loop5",
+"value": "Loop5"
+}
+]
+}
