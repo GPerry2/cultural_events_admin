@@ -9,7 +9,7 @@
           <span class="icon-bar"></span>
         </button>
         <span id="" class="navbar-brand">
-           <img class="sr-only" height=15px" src="<!--@echo SRC_PATH-->/img/lock.png" title="You are in a toronto.ca secure site." alt="An icon of a Lock denoting that this is a secure website." />
+           <img class="sr-only" height="15px" src="img/lock.png" title="You are in a toronto.ca secure site." alt="An icon of a Lock denoting that this is a secure website." />
           <span id="viewtitle"> Loading...</span>
         </span>
       </div>
@@ -18,35 +18,39 @@
           {{#top_menu}}
           {{#dropdown}}
           <li class="{{tm-class}}" id="{{tm-id}}">
-            <a tabindex="0" data-toggle="dropdown" data-submenu>
+            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" data-submenu>
               <span class="{{tm-icon-class}}" id="{{tm-id}}_title">{{tm-title}}</span>
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-          {{/dropdown}}
+              {{/dropdown}}
               {{#tm-items}}
               {{#submenu}}
-              <li class="dropdown-submenu"><a tabindex="0"><span class="{{sm-class}}"></span>{{submenu}}</a>
+              <li class="dropdown dropdown-submenu">
+                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+                  <span class="{{sm-class}}"></span>{{submenu}}</a>
                 <ul class="dropdown-menu">
                   {{#menu-item}}
                   {{#subsubmenu}}
-                  <li class="dropdown-submenu"><a tabindex="0"><span class="{{sm-class}}"></span>{{submenu}}</a>
+                  <li class="dropdown-submenu">
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+                      <span class="{{sm-class}}"></span>{{submenu}}</a>
                     <ul class="dropdown-menu">
                       {{#menu-item}}
-                      <li><a class="{{mi-class}}" data-status="{{data-status}}" data-filter="{{data-filter}}" id="{{mi-id}}" onclick="{{mi-click}}" data-id="{{data-id}}" tabindex="\"><span class="{{mi-icon-class}}"></span>{{title}}</a></li>
+                      <li><a class="{{mi-class}}" data-status="{{data-status}}" data-filter="{{data-filter}}" id="{{mi-id}}" onclick="{{mi-click}}" data-id="{{data-id}}" href="javascript:void(0)"><span class="{{mi-icon-class}}"></span>{{title}}</a></li>
                       {{/menu-item}}
                     </ul>
                   </li>
                   {{/subsubmenu}}
                   {{^subsubmenu}}
-                  <li><a class="{{mi-class}}" data-status="{{data-status}}" data-filter="{{data-filter}}" id="{{mi-id}}" onclick="{{mi-click}}" data-id="{{data-id}}" tabindex="\"><span class="{{mi-icon-class}}"></span>{{title}}</a></li>
+                  <li><a class="{{mi-class}}" data-status="{{data-status}}" data-filter="{{data-filter}}" id="{{mi-id}}" onclick="{{mi-click}}" data-id="{{data-id}}" href="javascript:void(0)"><span class="{{mi-icon-class}}"></span>{{title}}</a></li>
                   {{/subsubmenu}}
                   {{/menu-item}}
                 </ul>
               </li>
               {{/submenu}}
               {{^submenu}}
-              <li><a class="{{mi-class}}" data-status="{{data-status}}" data-filter="{{data-filter}}" id="{{mi-id}}" onclick="{{mi-click}}" data-id="{{data-id}}" tabindex="\"><span class="{{mi-icon-class}}"></span>{{title}}</a></li>
+              <li><a class="{{mi-class}}" data-status="{{data-status}}" data-filter="{{data-filter}}" id="{{mi-id}}" onclick="{{mi-click}}" data-id="{{data-id}}" href="javascript:void(0)"><span class="{{mi-icon-class}}"></span>{{title}}</a></li>
               {{/submenu}}
               {{/tm-items}}
               {{#dropdown}}
@@ -55,10 +59,10 @@
           {{/dropdown}}
           {{^dropdown}}
           {{#html}}
-         <li>{{{content}}}</li>
+          <li>{{{content}}}</li>
           {{/html}}
           {{^html}}
-          <li><a class="{{mi-class}}" data-status="{{data-status}}" data-filter="{{data-filter}}" id="{{mi-id}}" onclick="{{mi-click}}" data-id="{{data-id}}" tabindex="\"><span class="{{mi-icon-class}}"></span>{{title}}</a></li>
+          <li><a class="{{mi-class}}" data-status="{{data-status}}" data-filter="{{data-filter}}" id="{{mi-id}}" onclick="{{mi-click}}" data-id="{{data-id}}" href="javascript:void(0)"><span class="{{mi-icon-class}}"></span>{{title}}</a></li>
           {{/html}}
           {{/dropdown}}
           {{/top_menu}}

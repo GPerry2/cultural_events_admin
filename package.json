@@ -47,7 +47,7 @@
     "includeRangePicker": true,
     "includeMoment": true,
     "includeModeling": true,
-    "includeWebtrends": true,
+    "includeWebtrends": false,
     "isInternetStandaloneApp": false,
     "includeBootbox": true,
     "includeDropzone": true,

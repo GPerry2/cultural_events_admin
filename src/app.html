@@ -33,7 +33,8 @@ It should contain stylesheet references (and possibly other stuff) that this app
 <!-- endinject -->
 
 <!-- place your application stylesheet references here: -->
-<link rel="stylesheet" type="text/css" href="<!-- @echo SRC_PATH -->/styles/main.css">
+<link rel="stylesheet" type="text/css" href="<!-- @echo SRC_PATH -->/styles/cot_admin_custom.css">
+<link rel="stylesheet" type="text/css" href="/bower_components/cot_staff/dist/deploy/styles/main.css">
 <link rel="stylesheet" type="text/css" href="/bower_components/jquery-datatables-checkboxes/css/dataTables.checkboxes.css">
 <link rel="stylesheet" type="text/css" href="/bower_components/datatables.net-bs/css/dataTables.bootstrap.css">
 <link rel="stylesheet" type="text/css" href="/bower_components/datatables.net-buttons-dt/css/buttons.dataTables.min.css">
@@ -79,8 +80,7 @@ It is best to avoid the use of IDs on HTML elements because
 <!-- endinject -->
 
 <!-- place your application script references here: -->
-<script type="text/javascript" src="/bower_components/shared_components/dist/scripts/app_main.js"></script>
-<script type="text/javascript" src="<!-- @echo SRC_PATH -->/scripts/app_form.js"></script>
+<script type="text/javascript" src="/bower_components/cot_staff/dist/deploy/scripts/app_main.js"></script>
 <script type="text/javascript" src="/bower_components/dropzone/dist/min/dropzone.min.js"></script>
 <script type="text/javascript" src="/bower_components/mustache.js/mustache.js"></script>
 <script type="text/javascript" src="/bower_components/js-signals/dist/signals.js"></script>
@@ -100,16 +100,14 @@ It is best to avoid the use of IDs on HTML elements because
 <script type="text/javascript" src="/bower_components/pdfmake/build/vfs_fonts.js"></script>
 <script type="text/javascript" src="/bower_components/datatables.net-buttons/js/buttons.html5.min.js"></script>
 <script type="text/javascript" src="/bower_components/bootstrap-notify/dist/bootstrap-notify.js"></script>
-
+<script type="text/javascript" src="<!-- @echo SRC_PATH -->/scripts/wip.js"></script>
 <!-- endbuild -->
-<!--@if ENV!='prod'-->
-<script type="text/javascript" src="https://was-intra-sit.toronto.ca/c3api_config/v2/ConfigService.svc/ConfigSet('hot_spot/combined.js')/ConfigContent"></script>
-<script type="text/javascript">
-</script>
-<!--@endif-->
+
+<script type="text/javascript" src="<!--@echo ROOT_ENV-->/c3api_config/v2/ConfigService.svc/ConfigSet('cultural_events/combined.js')/ConfigContent"></script>
+
 <script>
-  const src_path = '<!--@echo SRC_PATH-->';
-  const httpHost = '<!--@echo ENV-->' ;
-  const configURL = "https://was-intra-sit.toronto.ca/c3api_config/v2/ConfigService.svc/ConfigSet('hot_spot/combined.json')/ConfigContent";
+  const src_path = "<!--@echo SRC_PATH-->";
+  const httpHost = "<!--@echo ENV-->" ;
+  const configURL = "<!--@echo ROOT_ENV-->/c3api_config/v2/ConfigService.svc/ConfigSet('cultural_events/combined.json')/ConfigContent";
 </script>
 <!-- cot-app:footer end-->

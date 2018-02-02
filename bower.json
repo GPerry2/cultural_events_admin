@@ -1,13 +1,13 @@
 {
   "name": "cultural_events_admin",
-  "description": "Describe this app",
+  "description": "cultural_events_admin",
   "authors": [
-    "Your name here"
+    "graham.perry@toronto.ca"
   ],
   "private": true,
   "dependencies": {
-    "core": "https://github.com/CityofToronto/corejs.git#6.0.0",
-    "shared_components": "https://github.com/GPerry2/shared_components.git#core_6x",
+    "core": "https://github.com/CityofToronto/corejs.git#feature/repeat_control",
+    "cot_staff": "https://github.com/GPerry2/cot_staff.git#6.1.4",
     "mustache.js": "mustache#^2.3.0",
     "crossroads.js":"crossroads#^0.12.2",
     "jquery.populate.js":"jquery.populate#^0.5.0",
