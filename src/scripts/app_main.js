@@ -7,6 +7,7 @@
  * @param config {object} JSON  Object shorthand for app.data.config
  * @param myDropzone {object} DropZone.js custom COT implementation
  */
+
 const app = new cot_app('', {
   hasFooter: false,
   hasContentBottom: true,
@@ -401,7 +402,7 @@ function loadForm(destinationSelector, data, fid, repo, form_id) {
   });
   f.render({"target": destinationSelector});
   f.setModel(mymodel);
-  typeof registerFormEvents === "function" ? registerFormEvents(data) : "";
+
   app.forms[form_id] = f;
 
   $('.dropzone').each(function () {
@@ -414,33 +415,7 @@ function loadForm(destinationSelector, data, fid, repo, form_id) {
     let addRemoveLinks = $(this).attr("addRemoveLinks")? ($(this).attr("addRemoveLinks") == 'true'):upload_defaults.addRemoveLinks;
     let addPublishLinks = $(this).attr("addPublishLinks")? ($(this).attr("addPublishLinks") == 'true'): upload_defaults.addPublishLinks;
     let addDescription = $(this).attr("addDescription")? ($(this).attr("addDescription") == 'true'): upload_defaults.addDescription;
-    let showTable = $(this).attr("showTable ") ? ($(this).attr("showTable") == 'true') : upload_defaults.showTable;
-    let dictMaxFilesExceeded = $(this).attr("dictMaxFilesExceeded") ? $(this).attr("dictMaxFilesExceeded") : upload_defaults.dictMaxFilesExceeded;
-    let dz_id = $(this).attr("id");
-    let myDropzone = new Dropzone("div#" + dz_id, {
-      "dz_id": $(this).attr("id") + "_dz", "fid": fid, "form_id": form_id,
-      "url": config.httpHost.app[httpHost] + config.api.upload + config.upload_repo + '/' + config.upload_repo,
-      "acceptedFiles": acceptedFiles,
-      "maxFiles": maxFiles,
-      "dictDefaultMessage": dictDefaultMessage,
-      "maxFilesize": maxFilesize,
-      "dictFileTooBig": dictFileTooBig,
-      "addPublishLinks": addPublishLinks,
-      "dictMaxFilesExceeded": dictMaxFilesExceeded
-    });
-    dropzones[dz_id] = myDropzone;
-
-    showUploads(myDropzone, dz_id, data, repo, addRemoveLinks , showTable, addPublishLinks , addDescription);
-  });
-  $('.admin_dropzoneOLD').each(function () {
-    let upload_defaults = config.upload_defaults;
-    let maxFiles = parseInt($(this).attr("maxFiles")) ? parseInt($(this).attr("maxFiles")) : upload_defaults.maxFiles;
-    let maxFilesize = parseInt($(this).attr("maxFilesize")) ? parseInt($(this).attr("maxFilesize")) : upload_defaults.maxFilesize;
-    let acceptedFiles = $(this).attr("acceptedFiles") ? $(this).attr("acceptedFiles") : upload_defaults.acceptedFiles;
-    let dictDefaultMessage = $(this).attr("dictDefaultMessage") ? $(this).attr("dictDefaultMessage") : upload_defaults.dictDefaultMessage;
-    let dictFileTooBig = $(this).attr("dictFileTooBig") ? $(this).attr("dictFileTooBig") : upload_defaults.dictFileTooBig;
-    let addRemoveLinks = $(this).attr("addRemoveLinks")? ($(this).attr("addRemoveLinks") == 'true'):upload_defaults.addRemoveLinks;
-    let addPublishLinks = $(this).attr("addPublishLinks")? ($(this).attr("addPublishLinks") == 'true'): upload_defaults.addPublishLinks;
+    let addCredit= $(this).attr("addCredit")? ($(this).attr("addCredit") == 'true'): upload_defaults.addCredit;
     let showTable = $(this).attr("showTable ") ? ($(this).attr("showTable") == 'true') : upload_defaults.showTable;
     let dictMaxFilesExceeded = $(this).attr("dictMaxFilesExceeded") ? $(this).attr("dictMaxFilesExceeded") : upload_defaults.dictMaxFilesExceeded;
     let dz_id = $(this).attr("id");
@@ -454,103 +429,12 @@ function loadForm(destinationSelector, data, fid, repo, form_id) {
       "dictFileTooBig": dictFileTooBig,
       "addPublishLinks": addPublishLinks,
       "dictMaxFilesExceeded": dictMaxFilesExceeded,
-      "previewTemplate":`<div id="template" class="file-row">
-                                <div>
-                                  <span class="preview"><img data-dz-thumbnail /></span>
-                                  </div>
-                                  <div>
-                                    <div class="name" data-dz-name></div>
-                                    <span class="error text-danger" data-dz-errormessage></span>
-                                    <div class="form-group">
-                                      <label class="sr-only" for="photo_comment">Comment for image</label>
-                                      <textarea  class="form-control upload_description" rows="2" cols="30" placeholder="Description (required)"></textarea></div>
-                                  </div>
-                                  <div>
-                                    <p class="size" data-dz-size></p>
-                                    <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-                                    <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
-                                    </div>
-                                  </div>
-                                <div>
-                                  <button class="btn btn-primary start">
-                                  <i class="glyphicon glyphicon-upload"></i>
-                                  <span>Start</span>
-                                  </button>
-                                  <button data-dz-remove class="btn btn-warning cancel">
-                                    <i class="glyphicon glyphicon-ban-circle"></i>
-                                    <span>Cancel</span>
-                                  </button>
-                                  <button data-dz-remove class="btn btn-danger delete">
-                                    <i class="glyphicon glyphicon-trash"></i>
-                                    <span>Delete</span>
-                                  </button>
-                                </div>
-                              </div>`,
-      "paramName": "file",
-      "autoQueue": false, // Make sure the files aren't queued until manually added
-      "previewsContainer": "#"+ dz_id+"_previews", // Define the container to display the previews
-      "clickable": ".fileinput-button",
-      init:function(){
-        this
-          .on("error", function(file, message) {
-            //console.log(message, this.options.dictFileTooBig);
-            if(message === this.options.dictFileTooBig){
-              //this.removeFile(file);
-              $(file.previewElement).find(".upload_description").hide();
-              $(file.previewElement).find(".start").prop("disabled", "disabled");
-            }
-
-          })
-          .on("sending", function (file) {
-            file.previewElement.querySelector(".start").setAttribute("disabled", "disabled");
-          })
-          .on("maxfilesexceeded", function (file) {
-
-            $(file.previewElement).find(".upload_description").hide();
-            $(file.previewElement).find(".start").prop("disabled", "disabled");
-          })
-          .on("addedfile", function (file) {
-            console.log("addedfile init", file )
-            file.id = "U" + moment.now();
-            let pv = $(file.previewElement);
-            let desc = pv.find(".upload_description");
-
-            desc.prop("id","ud_" + file.id)
-              .prop("name","ud_" + file.id);
-            let fv = $("#"+form_id).data('formValidation');
-            fv.addField($("#"+"ud_" + file.id) , {
-              validators: {
-                notEmpty: {
-                  message: 'The ISBN is required'
-                }
-              }
-            });
-            // Hookup the start button
-            pv.find(".start").prop("id","start_"+file.id);
-            pv.find(".start").off("click").on("click", function (e) {
-              e.preventDefault();
-              myDropzone.enqueueFile(file);
-              /*
-                if (desc.val() == "") {
-                  desc.parent().addClass("has-error");
-                } else {
-                  myDropzone.enqueueFile(file);
-                  desc.parent().removeClass("has-error");
-                  desc.parent().addClass("has-success");
-                }
-                */
-            });
-          })
-          .on("removedfile", function (file) {})
-          .on("success", function (file) {});
-      }
+      "addRemoveLinks":true
     });
+
     dropzones[dz_id] = myDropzone;
 
-    //showUploadsAdmin(myDropzone, dz_id, data, repo, addRemoveLinks , showTable, addPublishLinks);
-
-
-
+    showUploads(myDropzone, dz_id, data, repo, addRemoveLinks , showTable, addPublishLinks , addDescription, addCredit);
   });
 
   let modifiedUsername = decodeURIComponent(getCookie(repo + '.cot_uname'));
@@ -587,199 +471,9 @@ function loadForm(destinationSelector, data, fid, repo, form_id) {
       }
     }
   }
-
+  typeof registerFormEvents === "function" ? registerFormEvents(data) : "";
   toggleView("form_pane");
 
-}
-
-function showUploadsAdmin(DZ, id, data, repo, allowDelete, showTable, allowPublish) {
-
-  let thisDZ = DZ;
-
-  if(data && data[id]) {
-    thisDZ.existingUploads = data[id];
-    $.each(data[id], function (i, row) {
-      let getURL = config.httpHost.app[httpHost] + config.api.upload + config.upload_repo + '/' + row.bin_id + '?sid=' + getCookie(config.default_repo + '.sid');
-      let getLink = `<button class="btn btn-primary" onclick="event.preventDefault();window.open('` + getURL + `')"><span title="Download/Open Attachment" class="glyphicon glyphicon-download"></span></button>`;
-      let deleteLink = '<button class="btn btn-warning removeUpload" data-id="' + i + '" data-bin="' + row.bin_id + '" ><span title="Delete Attachment" class="glyphicon glyphicon-trash"></span></button>';
-      let publishLink = '<button class="btn btn-success publishUpload" data-id="' + i + '" data-bin="' + row.bin_id + '" ><span title="Publish Attachment" class="glyphicon glyphicon-cloud-upload"></span></button>';
-      let keepLink = '<button class="btn btn-success keepUpload" data-id="' + i + '" data-bin="' + row.bin_id + '" ><span title="Keep Attachment" class="glyphicon glyphicon-ok"></span></button>';
-      let buttons = getLink;
-      let caption = row.name;
-      let status = row.status ? row.status : "";
-      buttons += allowDelete ? deleteLink : '';
-      buttons += allowPublish && status != "publish" ? publishLink : '';
-      buttons += status === "" || status === "new" ? keepLink : '';
-
-
-      //make the thumbnails clickable to view file
-      /*
-      thisDZ.on("addedfile", function (file) {
-        console.log("addedfile post",file)
-        file.getURL = getURL;
-        file.dataURL = row.type.indexOf('image')>-1 ?getURL : getDefaultThumbnail(row.type);
-        file.caption = caption;
-        if (row.bin_id == file.bin_id) {
-          $(file.previewElement).find(".preview").off("click").on("click",function(){window.open(file.getURL);})
-        }
-      });
-      */
-      //thisDZ.emit("addedfile", row);
-      //add the thumbnail to the dropzone for all files already on the server
-
-      thisDZ.createThumbnailFromUrl(
-        row,
-        thisDZ.options.thumbnailWidth,
-        thisDZ.options.thumbnailHeight,
-        thisDZ.options.thumbnailMethod,
-        true,
-        function(thumbnail) {
-          thisDZ.emit('thumbnail', row, thumbnail);
-          thisDZ.emit("complete", row);
-        }, "anonymous"
-      );
-      //thisDZ.emit("thumbnail", row, getDefaultThumbnail(row.type));
-      //thisDZ.createThumbnailFromUrl(row, getURL);
-      //set the uploaded file to completed and set the max files for this dropzone.
-      //thisDZ.emit("complete", row);
-      thisDZ.options.maxFiles = thisDZ.options.maxFiles - 1;
-
-    });
-  }
-
-
-  thisDZ.on("removedfile", function (file) {
-    updateAttachmentStatus(thisDZ, file.bin_id, repo, 'delete', false);
-  });
-  $("#maincontent").off("click", ".removeUpload").on("click", ".removeUpload",function (e) {
-    e.preventDefault();
-    bootbox.confirm({
-      size: "small",
-      message: "Are you sure you want to DELETE Selected?",
-      callback: function (result) {
-        if (result === true) {
-          updateAttachmentStatus(thisDZ, $(e.currentTarget).attr('data-bin'), repo, 'delete', true);
-        }
-      }
-    });
-  });
-  $("#maincontent").off("click", ".publishUpload").on("click", ".publishUpload",function () {
-    event.preventDefault();
-    let update = updateAttachmentStatus(thisDZ, $(this).attr('data-bin'), repo, 'publish', true);
-  });
-  $("#maincontent").off("click", ".keepUpload").on("click", ".keepUpload",function () {
-    event.preventDefault();
-    let update = updateAttachmentStatus(thisDZ, $(this).attr('data-bin'), repo, 'keep', true);
-    if(update){}else{bootbox.alert("Upload Status update failed.");}
-  });
-}
-
-function setUpDropZone(data) {
-  let form_data = data;
-  console.log ("setUpDropZone",form_data)
-  let myDropzone= new Dropzone("div#form_pane", { // Make the whole body a dropzone
-    url: config.httpHost.app[httpHost] + config.api.upload + config.upload_repo + '/' + config.upload_repo,
-    thumbnailWidth: 80,
-    acceptedFiles:"image/gif,image/GIF,image/png,image/PNG,image/jpg,image/JPG,image/jpeg,image/JPEG",
-    dictInvalidFileType: "Only the following file types are allowed: gif, png, jpg, jpeg",
-    maxFilesize: 2.1,
-    dictFileTooBig: "Maximum size for file attachment is 2 MB",
-    dictMaxFilesExceeded: "Maximum 3 uploaded files",
-    maxFiles: 3,
-    paramName: "file",
-    previewTemplate:`<div id="template" class="file-row">
-                                <div>
-                                  <span class="preview"><img data-dz-thumbnail /></span>
-                                  </div>
-                                  <div>
-                                    <div class="name" data-dz-name></div>
-                                    <span class="error text-danger" data-dz-errormessage></span>
-                                    <div class="form-group">
-                                      <label class="sr-only" for="photo_comment">Comment for image</label>
-                                      <textarea  class="form-control upload_description" rows="2" cols="30" placeholder="Description (required)"></textarea></div>
-                                  </div>
-                                  <div>
-                                    <p class="size" data-dz-size></p>
-                                    <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-                                    <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
-                                    </div>
-                                  </div>
-                                <div>
-                                  <button class="btn btn-primary start">
-                                  <i class="glyphicon glyphicon-upload"></i>
-                                  <span>Start</span>
-                                  </button>
-                                  <button data-dz-remove class="btn btn-warning cancel">
-                                    <i class="glyphicon glyphicon-ban-circle"></i>
-                                    <span>Cancel</span>
-                                  </button>
-                                  <button data-dz-remove class="btn btn-danger delete">
-                                    <i class="glyphicon glyphicon-trash"></i>
-                                    <span>Delete</span>
-                                  </button>
-                                </div>
-                              </div>`,
-    // previewTemplate: previewTemplate,
-    autoQueue: false, // Make sure the files aren't queued until manually added
-    previewsContainer: "#previews", // Define the container to display the previews
-    clickable: ".fileinput-button", // Define the element that should be used as click trigger to select files.
-    init:function(form_data){
-      console.log("init data:", form_data);
-      this
-        .on("error", function(file, message) {
-          //console.log(message, this.options.dictFileTooBig);
-          if(message === this.options.dictFileTooBig){
-            //this.removeFile(file);
-            $(file.previewElement).find(".upload_description").hide();
-            $(file.previewElement).find(".start").prop("disabled", "disabled");
-          }
-
-        });
-    }
-  });
-  myDropzone
-    .on("sending", function (file) {
-    file.previewElement.querySelector(".start").setAttribute("disabled", "disabled");
-  })
-    .on("maxfilesexceeded", function (file) {
-
-      $(file.previewElement).find(".upload_description").hide();
-      $(file.previewElement).find(".start").prop("disabled", "disabled");
-    })
-    .on("addedfile", function (file) {
-
-      file.id = "U" + moment.now();
-      let pv = $(file.previewElement);
-      let desc = pv.find(".upload_description");
-
-      desc.prop("id","ud_" + file.id)
-        .prop("name","ud_" + file.id);
-      let fv = $("#hot_eats").data('formValidation');
-      fv.addField($("#"+"ud_" + file.id) , {
-        validators: {
-          notEmpty: {
-            message: "REQUIRED"
-          }
-        }
-      });
-      // Hookup the start button
-      pv.find(".start").prop("id","start_"+file.id);
-      pv.find(".start").off("click").on("click", function (e) {
-        e.preventDefault();
-        myDropzone.enqueueFile(file);
-        /*
-          if (desc.val() == "") {
-            desc.parent().addClass("has-error");
-          } else {
-            myDropzone.enqueueFile(file);
-            desc.parent().removeClass("has-error");
-            desc.parent().addClass("has-success");
-          }
-          */
-      });
-    })
-    .on("removedfile", function (file) {})
-    .on("success", function (file) {});
 }
 
 /**
@@ -1318,17 +1012,14 @@ class cc_retrieve_view {
 
             if (columnFilter !== null && columnFilter !== "") {
               if (value.isArray) {
-                //              if(colIsArray){
-                asColumnFilters.push(sFieldName + "/any(d:d eq '" + columnFilter + "')");
+                let thisFilter = columnFilter.split("'")[1].trim();
+                if(thisFilter!==""){
+                  asColumnFilters.push(sFieldName + "/any(d:d eq '" + columnFilter.split("'")[1] + "')");
+                }
               } else {
-
                 asColumnFilters.push(columnFilter);
-
-                //asColumnFilters.push("contains((" + sFieldName + "),'" + columnFilter + "')");
-
               }
             }
-
             if (restrict  && restrict !== "") {
               asRestrictFilters.push(restrict);
             }
@@ -1341,6 +1032,7 @@ class cc_retrieve_view {
       if (asFilters.length > 0) {
         data.$filter = asFilters.join(" or ");
       }
+
       if (asColumnFilters.length > 0) {
         if (data.$filter !== undefined) {
           data.$filter = "(" + data.$filter + ") and (" + asColumnFilters.join(" and ") + ")";
@@ -1348,6 +1040,7 @@ class cc_retrieve_view {
           data.$filter = asColumnFilters.join(" and ");
         }
       }
+
       if (asRestrictFilters.length > 0) {
         if (data.$filter !== undefined) {
           data.$filter = "(" + data.$filter + ") and (" + asRestrictFilters.join(" and ") + ")";
@@ -1355,6 +1048,7 @@ class cc_retrieve_view {
           data.$filter = asRestrictFilters.join(" and ");
         }
       }
+
       for (let i = 0; i < oParams.iSortingCols; i++) {
         if (isColumnArray[oParams["iSortCol_" + i]]) {
           asOrderBy.push(oParams["mDataProp_" + oParams["iSortCol_" + i]] + "/any(d:d) " + (oParams["sSortDir_" + i] || ""));
@@ -1366,11 +1060,13 @@ class cc_retrieve_view {
         data.$orderby = asOrderBy.join();
       }
     }
+    //console.log(sUrl,asOrderBy, data);
     sUrl += '?' +
       Object.keys(data).map(function (key) {
         return encodeURIComponent(key) + '=' +
           encodeURIComponent(data[key]);
       }).join('&');
+
     $.ajax(jQuery.extend({}, oSettings.oInit.ajax, {
       "url": sUrl,
       "jsonp": bJSONP,
@@ -1397,6 +1093,20 @@ class cc_retrieve_view {
         }
         oDataSource.iTotalDisplayRecords = oDataSource.iTotalRecords;
         fnCallback(oDataSource);
+      },
+      "error": function error(xhr, status, _error) {
+        console.log(xhr, status, _error);
+        if(xhr.status===400){console.log(xhr.status);}
+        else if(xhr.status===403 || xhr.status===401) {
+          cot_app.showModal({
+            title: config.messages.unauthorized.title,
+            body: config.messages.unauthorized.body,
+            onHidden: function onHidden() {
+              oLogin.logout();
+            }
+          });
+        }
+        else{console.log(xhr.status);}
       }
     }));
   } // end fnServerData
@@ -1410,6 +1120,7 @@ class cc_retrieve_view {
  * @param status {string} - Status to set the uploaded file to (delete or keep)
  */
 function updateAttachmentStatus(DZ, bin_id, repo, status, process) {
+
   if(auth()) {
     $("#maincontent :input, .dz-hidden-input").prop("disabled", true);
     let updateURL = config.httpHost.app[httpHost] + config.api.upload_post + 'binUtils/' + config.upload_repo + '/' + bin_id + '/' + status + '?sid=' + getCookie(config.default_repo + '.sid');
@@ -1464,6 +1175,9 @@ function processUploads(DZ, repo, sync) {
   $.each(uploadFiles, function(i,row){
     let desc = $("#desc_"+row.bin_id).val();
     row.description = desc;
+    let credit = $("#credit_"+row.bin_id).val();
+    row.description = desc;
+    row.credit = credit;
   });
 
   if (_files.length == 0) {}
@@ -1494,37 +1208,46 @@ function processUploads(DZ, repo, sync) {
  * @param showTable {boolean} - display the uploaded file table.
  * @param allowPublish {boolean} - display the delete button
  */
-function showUploads(DZ, id, data, repo, allowDelete, showTable, allowPublish, showDescription) {
+function showUploads(DZ, id, data, repo, allowDelete, showTable, allowPublish, showDescription, showCredit) {
 
   let thisDZ = DZ;
   let _uploads = '<table width="100%" class="table-condensed table-responsive"><thead><tr>';
-      _uploads +='<th>Name</th>';
-      _uploads += showDescription ? '<th>Description</th>':'';
-      _uploads +='<th>Size</th><th>Status</th><th>Actions</th>';
-      _uploads +='</tr></thead><tbody>';
+  _uploads +='<th>Name</th>';
+  _uploads += showDescription || showCredit ? '<th>Description/Credit</th>':'';
+  _uploads +='<th>Size</th><th>Status</th><th>Actions</th>';
+  _uploads +='</tr></thead><tbody>';
   if(data && data[id]) {
     thisDZ.existingUploads = data[id];
     $.each(data[id], function (i, row) {
       //console.log(row)
       let getURL = config.httpHost.app[httpHost] + config.api.upload + config.upload_repo + '/' + row.bin_id + '?sid=' + getCookie(config.default_repo + '.sid');
       let getLink = `<button class="btn btn-primary" onclick="event.preventDefault();window.open('` + getURL + `')"><span title="Download/Open Attachment" class="glyphicon glyphicon-download"></span></button>`;
-      let deleteLink = '<button class="btn btn-warning removeUpload" data-id="' + i + '" data-bin="' + row.bin_id + '" ><span title="Delete Attachment" class="glyphicon glyphicon-trash"></span></button>';
-      let publishLink = '<button class="btn btn-success publishUpload" data-id="' + i + '" data-bin="' + row.bin_id + '" ><span title="Publish Attachment" class="glyphicon glyphicon-cloud-upload"></span></button>';
-      let keepLink = '<button class="btn btn-success keepUpload" data-id="' + i + '" data-bin="' + row.bin_id + '" ><span title="Keep Attachment" class="glyphicon glyphicon-ok"></span></button>';
+      let deleteLink = '<button class="btn btn-danger removeUpload" data-id="' + i + '" data-bin="' + row.bin_id + '" dz-id="'+id+'" ><span title="Delete Attachment" class="glyphicon glyphicon-trash"></span></button>';
+      let publishLink = '<button class="btn btn-success publishUpload" data-id="' + i + '" data-bin="' + row.bin_id + '" dz-id="'+id+'" ><span title="Publish Attachment" class="glyphicon glyphicon-cloud-upload"></span></button>';
+      let unpublishLink = '<button class="btn btn-warning unpublishUpload" data-id="' + i + '" data-bin="' + row.bin_id + '" dz-id="'+id+'" ><span title="Reset Attachment to Status Keep" class="glyphicon glyphicon-refresh"></span></button>';
+      let keepLink = '<button class="btn btn-success keepUpload" data-id="' + i + '" data-bin="' + row.bin_id + '" dz-id="'+id+'" ><span title="Keep Attachment" class="glyphicon glyphicon-ok"></span></button>';
       let buttons = getLink;
       let caption = row.name;
+      let publicLinkFileName = row.name.substring(0,row.name.indexOf(".")) +  "_" +row.bin_id + row.name.substring(row.name.lastIndexOf("."),row.name.length);
+      let publicLink = "<a target='NewTab' href='"+config.httpHost.app_public[httpHost] + config.api.upload_published_get + publicLinkFileName + "'>Published</a>"
       let status = row.status ? row.status : "";
+      status = row.status && row.status==="publish"? publicLink: row.status;
       let description = row && row.description ? row.description : '';
-      let row_description = '<div class="form-group has-feedback"><label class="sr-only" for="photo_comment">Comment for image</label><textarea class="form-control upload_description" rows="2" cols="30" placeholder="Description (required)" id="desc_' + row.bin_id + '" name="desc_' + row.bin_id + '">'+ description +'</textarea></div>';
+      let credit = row && row.credit ? row.credit : '';
+      let row_credit = '<div class="col-xs-12 form-group form-group-horizontal has-feedback upload"><label class="upload_credit_label control-label upload" for="credit_'+row.bin_id+'" >Credit for image</label><input name="credit_'+row.bin_id+'" placeholder="Photo Credit (recommended)" class="form-control upload_credit" id="credit_' + row.bin_id + '" value="'+credit+'"/></div>'
+      let row_description = '<div class="col-xs-12 form-group has-feedback upload"><label class="control-label upload" for="desc_' + row.bin_id + '">Comment for image</label><textarea class="form-control upload_description" rows="2" cols="20" placeholder="Description (required)" id="desc_' + row.bin_id + '" name="desc_' + row.bin_id + '">'+ description +'</textarea></div>';
       buttons += allowDelete ? deleteLink : '';
-      buttons += allowPublish && status != "publish" ? publishLink : '';
+      buttons += allowPublish && row.status != "publish" ? publishLink : unpublishLink;
       buttons += status === "" || status === "new" ? keepLink : '';
 
       //console.log(description);
-      _uploads += '<tr id="' + row.bin_id + '"><td>' + row.name + '</td>'
-      _uploads +=showDescription ? '<td>'+row_description+'</td>': '';
-      _uploads +='<td>' + row.size + '</td><td>' + status + '</td><td>' + buttons + '</td></tr>';
-          //make the thumbnails clickable to view file
+      _uploads += '<tr id="' + row.bin_id + '"><td>' + row.name + '</td>';
+      _uploads +=showDescription || showCredit? '<td>':'';
+      _uploads +=showDescription ? row_description : '';
+      _uploads +=showCredit ? row_credit: '';
+      _uploads +=showDescription || showCredit? '</td>':'';
+      _uploads +='</td><td>' + row.size + '</td><td>' + status + '</td><td>' + buttons + '</td></tr>';
+      //make the thumbnails clickable to view file
       thisDZ.on("addedfile", function (file) {
         file.getURL = getURL;
         file.dataURL = row.type.indexOf('image')>-1 ?getURL : getDefaultThumbnail(row.type);
@@ -1563,29 +1286,47 @@ function showUploads(DZ, id, data, repo, allowDelete, showTable, allowPublish, s
   _uploads += `</tbody></table>`;
   showTable ? $('#' + id + '_display').html(_uploads) : "";
   thisDZ.on("removedfile", function (file) {
-    updateAttachmentStatus(thisDZ, file.bin_id, repo, 'delete', false);
+    //updateAttachmentStatus(thisDZ, file.bin_id, repo, 'delete', false);
   });
   $("#maincontent").off("click", ".removeUpload").on("click", ".removeUpload",function (e) {
     e.preventDefault();
+
     bootbox.confirm({
       size: "small",
-      message: "Are you sure you want to DELETE Selected?",
-      callback: function (result) {
+      title: "Are you sure you want to DELETE Selected?",
+      message: config.upload_defaults.delete_message,
+      "callback": function (result) {
         if (result === true) {
-          updateAttachmentStatus(thisDZ, $(e.currentTarget).attr('data-bin'), repo, 'delete', true);
+          updateAttachmentStatus(dropzones[$(e.currentTarget).attr('dz-id')], $(e.currentTarget).attr('data-bin'), repo, 'delete', true);
         }
       }
     });
   });
-  $("#maincontent").off("click", ".publishUpload").on("click", ".publishUpload",function () {
-    event.preventDefault();
-    let update = updateAttachmentStatus(thisDZ, $(this).attr('data-bin'), repo, 'publish', true);
+  $("#maincontent").off("click", ".publishUpload").on("click", ".publishUpload",function (e) {
+    e.preventDefault();
+    let update = updateAttachmentStatus(dropzones[$(e.currentTarget).attr('dz-id')],$(e.currentTarget).attr('data-bin'), repo, 'publish', true);
   });
-  $("#maincontent").off("click", ".keepUpload").on("click", ".keepUpload",function () {
-    event.preventDefault();
-    let update = updateAttachmentStatus(thisDZ, $(this).attr('data-bin'), repo, 'keep', true);
+  $("#maincontent").off("click", ".keepUpload").on("click", ".keepUpload",function (e) {
+    e.preventDefault();
+    let update = updateAttachmentStatus(dropzones[$(e.currentTarget).attr('dz-id')], $(e.currentTarget).attr('data-bin'), repo, 'keep', true);
     if(update){}else{bootbox.alert("Upload Status update failed.");}
   });
+  $("#maincontent").off("click", ".unpublishUpload").on("click", ".unpublishUpload",function (e) {
+    e.preventDefault();
+    bootbox.confirm({
+      "size": "small",
+      "title":"Reset upload status to keep",
+      "message": config.upload_defaults.reset_message,
+      "callback": function (result) {
+        if (result === true) {
+          let update = updateAttachmentStatus(dropzones[$(e.currentTarget).attr('dz-id')], $(e.currentTarget).attr('data-bin'), repo, 'keep', true);
+          //if(update){}else{bootbox.alert("Upload Status update failed.");}
+        }
+      }
+    });
+
+  });
+  $(".dz-remove").hide();
 }
 
 /**
@@ -1744,4 +1485,106 @@ function test(){
   top.find('ul').append(sub);
   sub.find('ul').append(mi);
   $("#view-action-menu").find('ul:first').append(mi);
+}
+
+function printPDF(headerTextLeft , headerTextRight , footerTextLeft, watermark , fileName ,data){
+
+  let content = [];
+
+  $(".panel-info").each(function(i){
+
+    let this_section = {
+      style: 'wo_table',
+      table: {
+        widths: [ '*', '*'],
+        body: []
+      },
+      layout: 'lightHorizontalLines',
+      headerRows: 1
+    };
+    let this_row = [];
+    this_row.push([{text:$(this).find('.panel-heading').text(), colSpan:2, alignment: 'left', style: 'tableHeader'},{}])
+    this_section.table.body.push([{text:$(this).find('.panel-heading').text(), colSpan:2, alignment: 'left', style: 'tableHeader'},{}]);
+    $(this).find('.panel-body .row').each(function(index){
+
+      $(this).find('.form-group:visible').not('.upload').each(function(index){
+        $(this).find('.optional').empty();
+        let label = $(this).find('.control-label, .staticlabel').not('.upload').text();
+        let value = $(this).find('.form-control').val();
+        if(value){}else{
+          value = $(this).attr('id') ? data[$(this).attr('id').replace("Element","")]:"";
+        }
+        if(label){
+          let this_row = [label,value];
+          this_section.table.body.push(this_row);
+        }
+      });
+
+      $(this).find('.dropzone:visible').each(function(index){
+        $.each(data[$(this).attr("id")], function(i,val){
+          let row_title = i===0?"Uploaded Files":"";
+          let row_value =[val.name]
+
+          val.credit ? row_value.push("Credit: " + val.credit) : "";
+          val.description ? row_value.push("Desc: " + val.description) : "";
+          let this_row = [row_title, row_value];
+          this_section.table.body.push(this_row);
+        });
+      });
+
+    });
+    content.push(this_section)
+  });
+
+  pdfMake.createPdf({
+    watermark: {text:watermark, opacity: 0.05, bold:false},
+    header: {
+      margin: 10,
+      columns: [
+        {text: headerTextLeft },
+        { alignment: 'right',text: headerTextRight}
+      ]
+    },
+    footer: function(page, pages) {
+      return {
+        columns: [
+          footerTextLeft,
+          {
+            alignment: 'right',
+            text: [
+              { text: page.toString(), italics: true },
+              ' of ',
+              { text: pages.toString(), italics: true }
+            ]
+          }
+        ],
+        margin: [10, 0]
+      };
+    },
+    pageOrientation: 'portrait',
+    content:[content],
+    styles: {
+      header: {
+        fontSize: 22,
+        bold: true,
+        margin: [0, 0, 0, 10]
+      },
+      subheader: {
+        fontSize: 10,
+        bold: true,
+        margin: [0, 5, 0, 5]
+      },
+      wo_table: {
+        fontSize: 10,
+        margin: [0, 5, 0, 5]
+      },
+      tableHeader: {
+        bold: true,
+        fontSize: 10,
+        color: 'black'
+      }
+    }
+  }).download(fileName)
+
+
 }

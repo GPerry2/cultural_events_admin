@@ -1,0 +1,887 @@
+{
+  "title": "Hot Spot Admin",
+  "test": "test123",
+  "default_repo": "cultural_events",
+  "upload_repo": "cultural_events",
+  "default_view": "hot_spot",
+  "dateTimeFormat": "YYYY-MM-DD HH:mm ",
+  "dateFormat": "YYYY-MM-DD",
+  "short_text_max": 280,
+  "formName": {
+    "hot_spot": "Hot Spot Event",
+    "hot_eats": "Hot Eats Event"
+  },
+  "formHeaderFieldMap": {
+    "event_baby": "hs_eventName",
+    "hot_spot": "hs_eventName",
+    "hot_eats": "he_restaurantName"
+  },
+  "listName": {
+    "event_baby": "Event Baby",
+    "hot_spot": "Hotspot Events",
+    "hot_eats": "HOT Eats Restaurants",
+    "approved_hot_spot": "Approved Events"
+  },
+  "top_menu": [
+    {
+      "title": "Back to view",
+      "dropdown": false,
+      "mi-icon-class": "glyphicon glyphicon-arrow-left",
+      "mi-class": "btn-back-to-view forForm",
+      "mi-click": "toggleView(\"view_pane\");"
+    },
+    {
+      "title": " Save",
+      "dropdown": false,
+      "mi-icon-class": "glyphicon glyphicon-save",
+      "mi-class": "btn-menu-save forForm",
+      "mi-click": "$('#form_pane form:first').trigger('submit');"
+    },
+    {
+      "dropdown": true,
+      "tm-title": "Actions",
+      "tm-class": "dropdown forForm",
+      "tm-id": "export-menu",
+      "tm-items": [
+        {
+          "mi-class": "",
+          "title": " Save",
+          "mi-icon-class": "glyphicon glyphicon-save",
+          "mi-id": "menu-save",
+          "mi-click": "$('#form_pane form:first').trigger('submit');"
+        }
+      ]
+    },
+    {
+      "dropdown": true,
+      "tm-title": "View",
+      "tm-class": "dropdown forView",
+      "tm-id": "view-menu",
+      "tm-items": [
+        {
+          "submenu": "Hotspot",
+          "sm-class": "glyphicon glyphicon-star",
+          "menu-item": [
+            {
+              "title": "All Events",
+              "mi-class": "tablink",
+              "mi-icon-class": "",
+              "data-id": "hot_spot",
+              "data-status": "",
+              "data-filter": ""
+            },
+            {
+              "title": "Pending Events",
+              "mi-class": "tablink",
+              "data-id": "hot_spot",
+              "data-status": "Pending",
+              "data-filter": "hs_eventStatus:contains(hs_eventStatus, 'Pending')"
+            },
+            {
+              "title": "Approved Events",
+              "mi-class": "tablink",
+              "data-id": "hot_spot",
+              "data-status": "Approved",
+              "data-filter": "hs_eventStatus:contains(hs_eventStatus, 'Approved')"
+            },
+            {
+              "title": "Event Babies",
+              "mi-class": "tablink",
+              "data-id": "event_baby",
+              "data-status": "Approved"
+            }
+          ]
+        },
+        {
+          "submenu": "HOT Eats",
+          "sm-class": "glyphicon glyphicon-glass",
+          "menu-item": [
+            {
+              "title": "All Events",
+              "mi-class": "tablink",
+              "mi-icon-class": "",
+              "data-id": "hot_eats",
+              "data-status": "",
+              "data-filter": ""
+            },
+            {
+              "title": "Pending Events",
+              "mi-class": "tablink",
+              "data-id": "hot_eats",
+              "data-status": "Pending",
+              "data-filter": "he_eventStatus:contains(he_eventStatus, 'Pending')"
+            },
+            {
+              "title": "Approved Events",
+              "mi-class": "tablink",
+              "data-id": "hot_eats",
+              "data-status": "Approved",
+              "data-filter": "he_eventStatus:contains(he_eventStatus, 'Approved')"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "dropdown": true,
+      "tm-title": "Actions",
+      "tm-class": "dropdown forView",
+      "tm-id": "view-action-menu",
+      "tm-items": [
+        {
+          "submenu": "Create New",
+          "sm-class": "glyphicon glyphicon-pencil",
+          "menu-item": [
+            {
+              "title": "Hotspot Event",
+              "mi-icon-class": "glyphicon glyphicon-star",
+              "mi-class": "btn-createReport",
+              "data-id": "hot_spot"
+            },
+            {
+              "title": "HOT Eats Restaurant",
+              "mi-icon-class": "glyphicon glyphicon-glass",
+              "mi-class": "btn-createReport",
+              "data-id": "hot_eats"
+            }
+          ]
+        },
+        {
+          "title": "Delete Selected",
+          "mi-icon-class": "",
+          "mi-class": "btn-deleteSelected"
+        }
+      ]
+    },
+    {
+      "dropdown": true,
+      "tm-title": "Export",
+      "tm-class": "dropdown forView",
+      "tm-id": "export-menu",
+      "tm-items": [
+        {
+          "mi-class": "tabexport",
+          "title": " PDF",
+          "mi-icon-class": "fa fa-file-pdf-o",
+          "mi-id": "tabExportPDF"
+        },
+        {
+          "mi-class": "tabexport",
+          "title": " CSV",
+          "mi-icon-class": "fa fa-file-code-o",
+          "mi-id": "tabExportCSV"
+        },
+        {
+          "mi-class": "tabexport",
+          "title": " EXCEL",
+          "mi-icon-class": "fa fa-file-excel-o",
+          "mi-id": "tabExportEXCEL"
+        },
+        {
+          "mi-class": "tabexport",
+          "title": " Copy",
+          "mi-icon-class": "fa fa-clone",
+          "mi-id": "tabExportCopy"
+        }
+      ]
+    },
+    {
+      "dropdown": false,
+      "html": true,
+      "content": "<div class=\"forView\" id=\"custom-search-input\" style=\"width:200px !important;margin:3px;\"><div class=\"input-group\" ><div class=\"form-group has-feedback has-clear\" ><label for=\"admin_search\" class=\"sr-only\" >Site wide search input </label><input id=\"admin_search\" class=\"form-control\"  placeholder=\"keywordsearch\" name=\"admin_search\"><span class=\"form-control-clear glyphicon glyphicon-remove form-control-feedback hidden\"></span></div></div></div>"
+    },
+    {
+      "dropdown": true,
+      "tm-title": " UserName",
+      "tm-class": "dropdown",
+      "tm-icon-class": "glyphicon glyphicon-user",
+      "tm-id": "user_auth",
+      "tm-items": [
+        {
+          "title": "Logout",
+          "mi-id": "lo_username",
+          "mi-icon-class": "glyphicon glyphicon-log-out",
+          "mi-click": "oLogin.logout();"
+        }
+      ]
+    }
+  ],
+  "button": {
+    "saveReport": "Save",
+    "save": "Save"
+  },
+  "httpHost": {
+    "root": {
+      "local": "localhost",
+      "dev": "https://was-intra-sit.toronto.ca",
+      "qa": "https://was-intra-qa.toronto.ca",
+      "prod": "https://insideto-secure.toronto.ca"
+    },
+    "root_public": {
+      "local": "https://was-inter-sit.toronto.ca",
+      "dev": "https://was-inter-sit.toronto.ca",
+      "qa": "https://was-inter-qa.toronto.ca",
+      "prod": "https://secure.toronto.ca"
+    },
+    "app": {
+      "local": "https://was-intra-sit.toronto.ca",
+      "dev": "https://was-intra-sit.toronto.ca",
+      "qa": "https://was-intra-qa.toronto.ca",
+      "prod": "https://insideto-secure.toronto.ca"
+    },
+    "app_public": {
+      "local": "https://was-inter-sit.toronto.ca",
+      "dev": "https://was-inter-sit.toronto.ca",
+      "qa": "https://was-inter-qa.toronto.ca",
+      "prod": "https://secure.toronto.ca"
+    },
+    "auth": {
+      "local": "https://was-intra-sit.toronto.ca",
+      "dev": "https://was-intra-sit.toronto.ca",
+      "qa": "https://insideto-secure.toronto.ca",
+      "prod": "https://insideto-secure.toronto.ca"
+    },
+    "eventDispatcher": {
+      "dev": "http://cheetah-b4.corp.toronto.ca:5680",
+      "qa": "https://esb1qa.toronto.ca:5680",
+      "prod": "https://esb1.toronto.ca:5680"
+    }
+  },
+  "api": {
+    "get": "/c3api_data/v2/DataAccess.svc/",
+    "post": "/c3api_data/v2/DataAccess.svc/",
+    "put": "/c3api_data/v2/DataAccess.svc/",
+    "delete": "/c3api_data/v2/DataAccess.svc/",
+    "config": "/c3api_config/v2/ConfigService.svc/",
+    "email": "/cc_sr_admin_v1/submit/csu_email",
+    "eventDispatcher": "/rest/COTEventDispatcher_V2/REST",
+    "upload": "/cc_sr_admin_v1/upload/",
+    "upload_post": "/cc_sr_admin_v1/submit/",
+    "upload_published_get": "/webapps/CC/fileAPI/cultural_events/",
+    "authPathbu": "/c3api_auth/",
+    "authEndpointbu": "auth",
+    "authPath": "/cc_sr_admin_v1/",
+    "authEndpoint": "session",
+    "timeout": 15
+  },
+  "messages": {
+    "unauthorized": {
+      "title": "Unauthorized",
+      "body": "Youare not authorized to access this application"
+    },
+    "photo_error": {
+      "max_size": "Maximum file size exceeded for photo upload. Max file size is 2MB",
+      "max_number": "Maximum number of photos exceeded. Max 3 photos",
+      "error": "There has been an error uploading files."
+    },
+    "photo_description": {
+      "title": "Photo Description is Required",
+      "message": "A photo description is required for each photo."
+    },
+    "form_controls": {
+      "add_venue": "New venue added. Please provide details on the new venue.",
+      "remove_venue": "Venue removed from form.",
+      "add_date": "New venue event date set added to form. Please provide specific date and time details.",
+      "remove_date": "Venue event date field set removed from form.",
+      "toggle_event": {
+        "once": "Event Frequency occurs once selected. Please enter Start and End times for this event.",
+        "weekly": "Event Frequency occurs weekly selected. Please enter Start and End times for this event.",
+        "multiple": "Event Frequency occurs on multiple dates at this venue. Please enter date, times and description for this event."
+      }
+    },
+    "unprocessed_file": {
+      "title": "Photo Uploads in Queue",
+      "message": "It looks like you have added photos and provided a description, but forgot to click the upload button."
+    },
+    "current": "",
+    "load": {
+      "fail": "<strong>Unable to load!</strong> Report could not be retrieved. Please try again."
+    },
+    "save": {
+      "done": "<strong>Saved!</strong> This report was successfully saved.",
+      "fail": "<strong>Unable to save!</strong> This report could not be saved. Please try again."
+    },
+    "notify": {
+      "done": "<strong>Notified!</strong> This report was successfully sent to the Emergency Management Captain.",
+      "fail": "<strong>Unable to notify!</strong> This report could not be sent to the Emergency Management Captain. Please try again."
+    },
+    "submit": {
+      "done": "<strong>Submitted!</strong> This report was successfully sent to the Administrator.",
+      "fail": "<strong>Unable to submit!</strong> This report could not be submitted to the Administrator. Please try again."
+    },
+    "approve": {
+      "done": "<strong>Approved!</strong> This report was successfully approved.</div>",
+      "fail": "<strong>Unable to approve!</strong> This report could not be approved. Please try again."
+    },
+    "reject": {
+      "done": "<strong>Rejected!</strong> This report was successfully rejected and assigned back to the incident manager.",
+      "fail": "<strong>Unable to reject!</strong> This report could not be rejected. Please try again."
+    },
+    "delete": {
+      "done": "<strong>Deleted!</strong> Report was successfully deleted.",
+      "fail": "<strong>Unable to delete!</strong> This report could not be deleted. Please try again."
+    },
+    "noSubmissionsFound": "No submissions found.",
+    "fadeOutTime": 8000
+  },
+  "auth": {
+    "login": "<h2><strong>Session timeout!</strong> Please log in to access this application.</h2>",
+    "group": "<h2><strong>Unauthorized!</strong> You don't have sufficient group permissions to view this application.</h2>"
+  },
+  "status": {
+    "Draft": "Yes",
+    "Submitted": "Submitted",
+    "Approved": "Approved",
+    "Deleted": "Deleted",
+    "Yes": "Draft",
+    "Search": "Global Search"
+  },
+  "modal": {
+    "confirmRemoveReport": "Are you sure you want to permanently remove this report?",
+    "confirmRemoveTitle": "Are you sure you want to remove this item from the Workplace Inspection Report?"
+  },
+  "breadcrumbtrail": [
+    {
+      "name": "...",
+      "link": "http://www1.toronto.ca/wps/portal/contentonly?vgnextoid=3ea2ba2ae8b1e310VgnVCM10000071d60f89RCRD"
+    },
+    {
+      "name": "Arts and Culture",
+      "link": "http://www1.toronto.ca/wps/portal/contentonly?vgnextoid=ecc92271635af310VgnVCM10000071d60f89RCRD"
+    },
+    {
+      "name": "Arts Services",
+      "link": "http://www1.toronto.ca/wps/portal/contentonly?vgnextoid=412a2271635af310VgnVCM10000071d60f89RCRD"
+    },
+    {
+      "name": "Cultural Hotspot",
+      "link": "http://www1.toronto.ca/wps/portal/contentonly?vgnextoid=237bf66e0430b410VgnVCM10000071d60f89RCRD"
+    },
+    {
+      "name": "<img height=\"20\" src=\"img/lock.png\" > Cultural Hotspot Admin",
+      "link": ""
+    }
+  ],
+  "upload_defaults": {
+    "acceptedFiles": "image/gif,image/GIF,image/png,image/PNG,image/jpg,image/JPG,image/jpeg,image/JPEG",
+    "maxFiles": 3,
+    "dictDefaultMessage": "Drop image file here or click to upload",
+    "maxFilesize": 2.1,
+    "dictFileTooBig": "Maximum photo size for file attachment is 2 MB",
+    "addRemoveLinks": true,
+    "addPublishLinks": true,
+    "showTable": true,
+    "addDescription": true,
+    "addCredit": true,
+    "dictMaxFilesExceeded": "Maximum 3 uploaded files",
+    "reset_message": "Resetting image does not delete the image from the public server, only from the admin interface",
+    "delete_message": "Deleting image does not delete the image from the public server, only from the admin interface"
+  },
+  "eventTypeFilter": [
+    "Community",
+    "Literary",
+    "Visual Art",
+    "Festival",
+    "Performance",
+    "Workshop/Classes",
+    "Film",
+    "Talk",
+    "Historic",
+    "Tour/Walk"
+  ],
+  "eventTypeChoices": [
+    {
+      "text": "Community",
+      "value": "Community"
+    },
+    {
+      "text": "Literary",
+      "value": "Literary"
+    },
+    {
+      "text": "Visual Art",
+      "value": "Visual Art"
+    },
+    {
+      "text": "Festival",
+      "value": "Festival"
+    },
+    {
+      "text": "Performance",
+      "value": "Performance"
+    },
+    {
+      "text": "Workshop/Classes",
+      "value": "Workshop/Classes"
+    },
+    {
+      "text": "Film",
+      "value": "Film"
+    },
+    {
+      "text": "Talk",
+      "value": "Talk"
+    },
+    {
+      "text": "Historic",
+      "value": "Historic"
+    },
+    {
+      "text": "Tour/Walk",
+      "value": "Tour/Walk"
+    }
+  ],
+  "eventFeaturesFilter": [
+    "Fully Accessible",
+    "Partially Accessible",
+    "Not Accessible"
+  ],
+  "eventFeaturesChoices": [
+    {
+      "text": "Fully Accessible",
+      "value": "Fully Accessible"
+    },
+    {
+      "text": "Partially Accessible",
+      "value": "Partially Accessible"
+    },
+    {
+      "text": "Not Accessible",
+      "value": "Not Accessible"
+    }
+  ],
+  "eventFeaturedFilter": [
+    "Yes",
+    "No"
+  ],
+  "eventYesNoFilter": [
+    "Yes",
+    "No"
+  ],
+  "eventFeaturedChoices": [
+    {
+      "text": "Select...",
+      "value": ""
+    },
+    {
+      "text": "Yes",
+      "value": "Yes"
+    },
+    {
+      "text": "No",
+      "value": "No"
+    }
+  ],
+  "yesNoRadio": [
+    {
+      "text": "Yes",
+      "value": "Yes"
+    },
+    {
+      "text": "No",
+      "value": "No"
+    }
+  ],
+  "eventProjectFilter": [
+    "Community",
+    "Signature",
+    "Spark",
+    "Library"
+  ],
+  "wards": [
+    "Etobicoke North (1)",
+    "Etobicoke North (2)",
+    "Etobicoke Centre (3)",
+    "Etobicoke Centre (4)",
+    "Etobicoke-Lakeshore (5)",
+    "Etobicoke-Lakeshore (6)",
+    "York West (7)",
+    "York West (8)",
+    "York Centre (9)",
+    "York Centre (10)",
+    "York South-Weston (11)",
+    "York South-Weston (12)",
+    "Parkdale-High Park (13)",
+    "Parkdale-High Park (14)",
+    "Eglinton-Lawrence (15)",
+    "Eglinton-Lawrence (16)",
+    "Davenport (17)",
+    "Davenport (18)",
+    "Trinity-Spadina (19)",
+    "Trinity-Spadina (20)",
+    "St. Paul's (21)",
+    "St. Paul's (22)",
+    "Willowdale (23)",
+    "Willowdale (24)",
+    "Don Valley West (25)",
+    "Don Valley West (26)",
+    "Toronto Centre-Rosedale (27)",
+    "Toronto Centre-Rosedale (28)",
+    "Toronto-Danforth (29)",
+    "Toronto-Danforth (30)",
+    "Beaches-East York (31)",
+    "Beaches-East York (32)",
+    "Don Valley East (33)",
+    "Don Valley East (34)",
+    "Scarborough Southwest (35)",
+    "Scarborough Southwest (36)",
+    "Scarborough Centre (37)",
+    "Scarborough Centre (38)",
+    "Scarborough-Agincourt (39)",
+    "Scarborough Agincourt (40)",
+    "Scarborough-Rouge River (41)",
+    "Scarborough-Rouge River (42)",
+    "Scarborough East (43)",
+    "Scarborough East (44)"
+  ],
+  "eventProjectChoices": [
+    {
+      "text": "Select...",
+      "value": ""
+    },
+    {
+      "text": "Signature",
+      "value": "Signature"
+    },
+    {
+      "text": "Community",
+      "value": "Community"
+    },
+    {
+      "text": "Spark",
+      "value": "Spark"
+    },
+    {
+      "text": "Library",
+      "value": "Library"
+    }
+  ],
+  "eventStatusFilter": [
+    "Pending",
+    "Unapproved",
+    "Approved"
+  ],
+  "eventStatusChoices": [
+    {
+      "text": "Select...",
+      "value": ""
+    },
+    {
+      "text": "Unapproved",
+      "value": "Unapproved"
+    },
+    {
+      "text": "Pending",
+      "value": "Pending"
+    },
+    {
+      "text": "Approved",
+      "value": "Approved"
+    }
+  ],
+  "authorization": [
+    {
+      "value": "accepted",
+      "text": "I have the authority to enroll the above named business in the HOT Eats program and I authorize the use of the above information on the City of Toronto website in print publications and in other open data applications"
+    }
+  ],
+  "IntroText": "<div class=\"row\"><div class=\"col-xs-12 col-sm-2\"><img class=\"img-thumbnail2\" alt=\"hot eats logo\" src=\"img/hoteats-140x140.jpg\"></div><div class=\"col-xs-12 col-sm-10\"><span class=\"\" id=\"area-indicator-help\"><p><strong>Eligibility Criteria</strong></p><p></p><ul><li>Located in the 2017 Cultural Hotspot area (Eglinton Avenue to the north, Lake Ontario to the south, Bayview Avenue/the Don Valley to the west and Victoria Park Avenue to the east)</li><li>Possess a current Dine Safe Green Pass issued by Toronto Public Health</li><li>Provide a $25 or $50 gift certificate by June 9,  2017 to be awarded as a HOT Eats prize</li></ul><p></p><p></p><p>If you have questions, please contact Hyesoo Kim, Arts Program Officer, Arts &amp; Culture Services at <a href=\"mailto:culturalhotspot@toronto.ca?Subject=HOT Eats Inquiry\" target=\"_top\">culturalhotspot@toronto.ca</a> <br>or 416-392-1210.</p></span></div></div>",
+  "gift_certificateInfo": "<p><span style=\"color:red;\" class=\"glyphicon glyphicon-asterisk\"></span> In order to be eligible to participate in the HOT Eats program, you must provide a $25 or $50 gift certificate by June 9, 2017, to be awarded as a HOT Eats prize. The gift certificate must be valid until December 31, 2017.  The gift certificate must not require the bearer to make additional purchases.  If the average price of a meal, including a non-alcoholic drink, at your restaurant is more than $25, please provide a $50 gift certificate.</p>",
+  "restaurant_type": [
+    {
+      "text": "Bakery/Deli",
+      "value": "Bakery/Deli"
+    },
+    {
+      "text": "Cafe/Coffee Shop",
+      "value": "Cafe/Coffee Shop"
+    },
+    {
+      "text": "Casual Dining",
+      "value": "Casual Dining"
+    },
+    {
+      "text": "Fine Dining",
+      "value": "Fine Dining"
+    },
+    {
+      "text": "Pub/Bar",
+      "value": "Pub/Bar"
+    }
+  ],
+  "cuisine": [
+    {
+      "text": "African",
+      "value": "African"
+    },
+    {
+      "text": "Asian",
+      "value": "Asian"
+    },
+    {
+      "text": "Bakery/Desserts",
+      "value": "Bakery/Desserts"
+    },
+    {
+      "text": "Brunch",
+      "value": "Brunch"
+    },
+    {
+      "text": "Caribbean",
+      "value": "Caribbean"
+    },
+    {
+      "text": "Chinese",
+      "value": "Chinese"
+    },
+    {
+      "text": "East Asian",
+      "value": "Asian"
+    },
+    {
+      "text": "European",
+      "value": "European"
+    },
+    {
+      "text": "French",
+      "value": "French"
+    },
+    {
+      "text": "Greek",
+      "value": "Greek"
+    },
+    {
+      "text": "Indian",
+      "value": "Indian"
+    },
+    {
+      "text": "Irish",
+      "value": "Irish"
+    },
+    {
+      "text": "Italian",
+      "value": "Italian"
+    },
+    {
+      "text": "Japanese",
+      "value": "Japanese"
+    },
+    {
+      "text": "Korean",
+      "value": "Korean"
+    },
+    {
+      "text": "Kosher",
+      "value": "Kosher"
+    },
+    {
+      "text": "Mediterranean",
+      "value": "Mediterranean"
+    },
+    {
+      "text": "Mexican",
+      "value": "Mexican"
+    },
+    {
+      "text": "Middle Eastern",
+      "value": "Middle Eastern"
+    },
+    {
+      "text": "North American",
+      "value": "North American"
+    },
+    {
+      "text": "Pizza",
+      "value": "Pizza"
+    },
+    {
+      "text": "Sandwiches/Snacks",
+      "value": "Sandwiches/Snacks"
+    },
+    {
+      "text": "South Asian",
+      "value": "South Asian"
+    },
+    {
+      "text": "Sri Lankan",
+      "value": "Sri Lankan"
+    },
+    {
+      "text": "Thai",
+      "value": "Thai"
+    },
+    {
+      "text": "Vegan",
+      "value": "Vegan"
+    },
+    {
+      "text": "Vegetarian",
+      "value": "Vegetarian"
+    },
+    {
+      "text": "Vietnamese",
+      "value": "Vietnamese"
+    },
+    {
+      "text": "Other",
+      "value": "Other"
+    }
+  ],
+  "services": [
+    {
+      "text": "Family-friendly",
+      "value": "Family-friendly"
+    },
+    {
+      "text": "Licensed",
+      "value": "Licensed"
+    },
+    {
+      "text": "Live Music",
+      "value": "Live Music"
+    },
+    {
+      "text": "Art on Display",
+      "value": "Art on Display"
+    },
+    {
+      "text": "Take-out",
+      "value": "Take-out"
+    },
+    {
+      "text": "Dine-in",
+      "value": "Dine-in"
+    },
+    {
+      "text": "Delivery",
+      "value": "Delivery"
+    }
+  ],
+  "priceRange": [
+    {
+      "text": "Under $15",
+      "value": "Under $15"
+    },
+    {
+      "text": "$15 - $25",
+      "value": "$15 - $25"
+    },
+    {
+      "text": "$25 or more",
+      "value": "$25 or more"
+    }
+  ],
+  "accessibility": [
+    {
+      "text": "Fully Accessible",
+      "value": "Fully Accessible"
+    },
+    {
+      "text": "Not Accessible",
+      "value": "Not Accessible"
+    }
+  ],
+  "contactRole": [
+    {
+      "text": "Owner",
+      "value": "Owner"
+    },
+    {
+      "text": "Manager",
+      "value": "Manager"
+    },
+    {
+      "text": "Other",
+      "value": "Other"
+    }
+  ],
+  "gift_certificate": [
+    {
+      "text": "I would like to use a $25 Gift Certificate",
+      "value": "$25 Gift Certificate"
+    },
+    {
+      "text": "I would like to use a $50 Gift Certificate",
+      "value": "$50 Gift Certificate"
+    }
+  ],
+  "gift_certificate_next": [
+    {
+      "text": "I have my own certificate that I can issue",
+      "value": "Own Certificate"
+    },
+    {
+      "text": "I would like to use the HOT Eats certificate template and can print it myself for pick-up by the HOT Eats Team [this button should flip them to the printable gift certificate",
+      "value": "Print Certificate"
+    },
+    {
+      "text": " I would like to use the HOT Eats certificate but cannot print it, please contact me to arrange a time for a member of the HOT Eats team to bring a hard copy to my eatery to fill in and sign the  HOT Eats certificate.",
+      "value": "Arrange Certificate"
+    }
+  ],
+  "photoUploadHelp": "<span class=\"help-block\" id=\"photoHelp\" ><p>*By uploading an image within the Cultural Hotspot form, you are indicating that you have the authority to do so and are giving the City of Toronto copyright permission to reproduce and resize the image into a square for the purpose of promoting Cultural Hotspot and that giving this permission does not infringe any other person's rights.</p><p>Required image size: 2000x1500 pixels at 300 dpi in jpeg format.</p><p>This photo will be used to promote your event. Please choose something indicative of the event, or upload an event flyer.</p></span>",
+  "accessibilityHelp": "<span class=\"\"><p><strong>Partially Accessible Criteria:</strong><p>To qualify as a fully barrier-free and wheelchair-accessible location, your venue must comply with all items listed below:</p><ul><li> All pedestrian routes to and from the main entrance and exit should provide a level path or a ramp.</li><li>Main entrance and exit doors should be a minimum of 915mm wide to allow safe passage of persons who use mobility aids, including wheelchairs or scooters.</li><li> Glass doors should be clearly visible when closed. All door-opening hardware should be easy to grasp and use. Automatic door openers are recommended wherever possible. </li><li>Aisle spaces between furniture, equipment or other fixed objects should be wide enough to allow a person using mobility aids to pass.</li><li>If the program/activity is not held at entrance level, there must be an accessible elevator or rap to the floor where this activity is being held.</li></ul></p><p><strong>Fully Accessible Criteria:</strong><p>To qualify as a fully barrier-free and wheelchair-accessible location, your venue must comply with all items listed above and:</p><ul><li>Public washrooms should have a door entrance of at least 915mm wide. The washroom stall should also have an entrance of at least 915mm wide and the stall should have grab bars installed by the toilet. There should be at least one barrier-free sink (knee clearance of 735mm below the vanity counter) with lever faucets.</li><ul></p></span>",
+  "orgDescriptionHelp": "Organization description to appear on the Cultural Hotspot website.",
+  "long_text_max": 900,
+  "default_photo_published_2018": "/webapps/CC/fileAPI/cultural_events/Hotspot_2018_Cb4BSntaN6Ysgf4OrSR9Jw.jpg",
+  "default_photo_published": "/webapps/CC/fileAPI/cultural_events/edc-hotspot_2019_ID_web_colour_tagline_YAoQ_ShAitHnuJlD2sjMlQ.jpg",
+  "default_photo_credit": "default credit",
+  "default_photo_description": "default description",
+  "venueDateTimeDetailsHelp": "<p>Enter the date and time of your event. For example:</p><ul><li>June 16 to 19, 7 - 9 p.m.</li><li>Every Tuesday, May 12 to June 23, 2 - 4 p.m.</li><li>August 30 to October 2, weekdays 9 a.m.to 6 p.m. weekends & holidays 9 a.m. - 5 p.m.</li></ul>",
+  "loops": [
+    {
+      "text": "Loop1",
+      "value": "Loop1"
+    },
+    {
+      "text": "Loop2",
+      "value": "Loop2"
+    },
+    {
+      "text": "Loop3",
+      "value": "Loop3"
+    },
+    {
+      "text": "Loop4",
+      "value": "Loop4"
+    },
+    {
+      "text": "Loop5",
+      "value": "Loop5"
+    }
+  ],
+  "days_of_week": [
+    {
+      "text": "Select...",
+      "value": ""
+    },
+    {
+      "text": "Sunday",
+      "value": "0"
+    },
+    {
+      "text": "Monday",
+      "value": "1"
+    },
+    {
+      "text": "Tuesday",
+      "value": "2"
+    },
+    {
+      "text": "Wednesday",
+      "value": "3"
+    },
+    {
+      "text": "Thursday",
+      "value": "4"
+    },
+    {
+      "text": "Friday",
+      "value": "5"
+    },
+    {
+      "text": "Saturday",
+      "value": "6"
+    }
+  ]
+}

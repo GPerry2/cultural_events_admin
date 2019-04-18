@@ -6,8 +6,8 @@
   ],
   "private": true,
   "dependencies": {
-    "core": "https://github.com/CityofToronto/corejs.git#feature/repeat_control",
-    "cot_staff": "https://github.com/GPerry2/cot_staff.git#6.1.4",
+    "core": "https://github.com/CityofToronto/corejs.git#7.1.2",
+    "cot_staff": "https://github.com/GPerry2/cot_staff.git#7.2.0",
     "mustache.js": "mustache#^2.3.0",
     "crossroads.js":"crossroads#^0.12.2",
     "jquery.populate.js":"jquery.populate#^0.5.0",
