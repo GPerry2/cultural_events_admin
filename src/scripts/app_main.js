@@ -1336,7 +1336,7 @@ function showUploads(DZ, id, data, repo, allowDelete, showTable, allowPublish, s
  */
 function getDefaultThumbnail(stringType) {
   let thumb = "";
-  let img_root = src_path+ "/img/";
+  let img_root = src_path + "/img/";
   let type = stringType.indexOf("/") > -1 ? stringType.split("/")[1] : stringType
   switch (type) {
     case "jpeg":

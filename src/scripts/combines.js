@@ -1469,7 +1469,7 @@ function loadBabies(id, payload){
 }
 function generateBabiesFile(showDone){
   let filter  = "&$filter=hs_eventStatus eq 'Approved' and startDate ge " + moment().startOf('date').format();
-  let url = config.httpHost.app[httpHost] + config.api.get + config.default_repo + '/event_baby?$format=application/json;odata.metadata=none&unwrap=true&$skip=0&$top=1000&$orderby=startDate asc' + filter;
+  let url = config.httpHost.app[httpHost] + config.api.get + config.default_repo + '/event_baby?$format=application/json;odata.metadata=none&unwrap=true&$skip=0&$top=1000&$orderby=hs_featureEvent%20desc,startDate%20asc' + filter;
 
   $.ajax({
     "url": url,
